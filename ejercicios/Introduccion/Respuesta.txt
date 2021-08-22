@@ -1,0 +1,8 @@
+1. cambio de contexto
+2. paralelo
+3. serial
+4. serial
+5. serial
+6. concurrente
+7. serial
+8. serial
