@@ -24,14 +24,14 @@ uint64_t lecturaDatos(char* linea)
     }
 }
 
-// Calcula los factores primos y los agrega a una lista
+// Calcula los factores primos y los agrega a un arreglo
 // Adaptado de URL: https://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
-uint64_t calculoFactores(uint64_t numero, uint64_t* arregloFactores, uint64_t* tamanioArreglo)
+uint64_t* calcularFactores(uint64_t numero, uint64_t* arregloFactores, uint64_t* tamanioArreglo)
 {
     // Caso: número == par, entonces 2 es factor
     while (!(numero % 2)) 
     {
-        arregloFactores = agregaEnLista(2, arregloFactores, tamanioArreglo);
+        arregloFactores = agregarElemento(2, arregloFactores, tamanioArreglo);
         numero = numero / 2;
     }
 
@@ -40,7 +40,7 @@ uint64_t calculoFactores(uint64_t numero, uint64_t* arregloFactores, uint64_t* t
     {
         while (!(numero % i)) 
         {
-            arregloFactores = agregaEnLista(i, arregloFactores, tamanioArreglo);
+            arregloFactores = agregarElemento(i, arregloFactores, tamanioArreglo);
             numero = numero / i;
         }
     }
@@ -48,8 +48,38 @@ uint64_t calculoFactores(uint64_t numero, uint64_t* arregloFactores, uint64_t* t
     // Caso: número es un primo mayor a 2
     if (numero > 2) 
     {
-        arregloFactores = agregaEnLista(numero, arregloFactores, tamanioArreglo);
+        arregloFactores = agregarElemento(numero, arregloFactores, tamanioArreglo);
     }
 
   return arregloFactores;
+}
+
+uint64_t* agregarElemento(uint64_t n, uint64_t* arregloFactores, uint64_t* tamanioArreglo)
+{
+    // Se agrega el elemento al arreglo
+    // Caso en que el arreglo ya está lleno, por lo tanto se crea uno nuevo (incluyendo los nuevos datos)
+    if (arregloFactores[*tamanioArreglo - 1])
+    {
+        // Se copian los datos en el arreglo nuevo
+        uint64_t* nueva_lista = (uint64_t*) calloc(*tamanioArreglo + 20, sizeof(uint64_t));
+        for (uint64_t i = 0; i < *tamanioArreglo; ++i) 
+        {
+            nueva_lista[i] = arregloFactores[i];
+        }
+        // Se libera memoria y se copian los datos nuevos
+        free(arregloFactores);
+        *tamanioArreglo += 20;
+        arregloFactores = nueva_lista;
+    }
+    // Se agrega el dato al arreglo
+    char agregado = 0;
+    for (uint64_t i = 0; i < *tamanioArreglo && !agregado; ++i) 
+    {
+        if (!arregloFactores[i]) 
+        {
+            arregloFactores[i] = n;
+            agregado = 1;
+        }
+    }
+    return arregloFactores;
 }

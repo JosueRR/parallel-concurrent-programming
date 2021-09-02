@@ -13,10 +13,14 @@
 // Lee una línea de texto
 uint64_t lecturaDatos(char* linea);
 
-// Calcula los factores primos y los agrega a una lista
-uint64_t calculoFactores(uint64_t numero, uint64_t* arregloFactores, uint64_t* tamanioArreglo);
+// Agrega elementos a un arreglo
+uint64_t* agregarElemento(uint64_t numero, uint64_t* arregloFactores, uint64_t* tamanioArreglo);
 
-// Imprime una lista con los factores primos de un número dado
+// Calcula los factores primos y los agrega a un arreglo
+uint64_t* calcularFactores(uint64_t numero, uint64_t* arregloFactores, uint64_t* tamanioArreglo);
+
+// Imprime una arreglo con los factores primos de un número dado
 void impresionDatos(uint64_t numero, uint64_t* arregloFactores, uint64_t* tamanioArreglo);
+
 
 #endif // PRIME_FACT_H
