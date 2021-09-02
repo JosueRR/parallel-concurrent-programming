@@ -2,9 +2,10 @@
 
 #include <stdint.h>
 #include <stdlib.h>
+#include <inttypes.h>
 #include <string.h>
-#include <prime_fact.h>
-
+#include <math.h>
+#include "prime_fact.h"
 
 uint64_t lecturaDatos(char* linea)
 {
@@ -18,10 +19,13 @@ uint64_t lecturaDatos(char* linea)
         numero = strtoull(linea, NULL, 10);
         return numero;
     }
-    else 
+    // En caso de ser 0 o 1 se considera como NA
+    else if (strtoull(linea, NULL, 10) == 0 || strtoull(linea, NULL, 10) == 1)
     {
-        return numero;
+        return numero = NA;
     }
+    // Cualquier otro caso será considerado invalid number
+    return numero = INVALID_NUMBER;
 }
 
 // Calcula los factores primos y los agrega a un arreglo
@@ -82,4 +86,38 @@ uint64_t* agregarElemento(uint64_t n, uint64_t* arregloFactores, uint64_t* taman
         }
     }
     return arregloFactores;
+}
+
+void impresionDatos(uint64_t numero, uint64_t* arregloFactores, uint64_t* tamanioArreglo)
+{
+    // Variables para imprimir los datos
+    uint64_t indice = 0;
+    uint64_t factor = 0;
+    uint64_t potencia = 0;
+    // Imprime el número
+    printf("%" PRIu64 ":", numero);
+
+    // Se imprimen las potencias y factores del arreglo
+    while (arregloFactores[indice] && indice < *tamanioArreglo) 
+    {
+        factor = arregloFactores[indice];
+        potencia = 0;
+
+        while (factor == arregloFactores[indice]) 
+        {
+            ++potencia;
+            ++indice;
+        }
+        
+        if (potencia != 1) 
+        {
+            printf(" %" PRIu64 "^%" PRIu64, factor, potencia);
+        }
+        // Cuando la potencia es 1 se ignora 
+        else 
+        {
+            printf(" %" PRIu64, factor);
+        }
+    }
+    printf("\n");
 }

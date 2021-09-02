@@ -2,11 +2,11 @@
 
 #ifndef PRIME_FACT_H
 #define PRIME_FACT_H
-
 #include <stdint.h>
 #include <stdio.h>
 
-#define ERR_NUM_INVALIDO 1
+#define INVALID_NUMBER 0
+#define NA 1
 
 /* Métodos */
 
