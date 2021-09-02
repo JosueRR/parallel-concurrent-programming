@@ -6,6 +6,8 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#define ERR_NUM_INVALIDO 1
+
 /* Métodos */
 
 // Lee una línea de texto
