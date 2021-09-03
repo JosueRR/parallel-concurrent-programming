@@ -14,16 +14,16 @@
 /* Métodos */
 
 // Lee una línea de texto
-uint64_t lecturaDatos(char* linea);
+int64_t lecturaDatos(char* linea);
 
 // Agrega elementos a un arreglo
-uint64_t* agregarElemento(uint64_t numero, uint64_t* arregloFactores, uint64_t* tamanioArreglo);
+int64_t* agregarElemento(int64_t numero, int64_t* arregloFactores, int64_t* tamanioArreglo);
 
 // Calcula los factores primos y los agrega a un arreglo
-uint64_t* calcularFactores(uint64_t numero, uint64_t* arregloFactores, uint64_t* tamanioArreglo);
+int64_t* calcularFactores(int64_t numero, int64_t* arregloFactores, int64_t* tamanioArreglo);
 
 // Imprime una arreglo con los factores primos de un número dado
-void impresionDatos(uint64_t numero, uint64_t* arregloFactores, uint64_t* tamanioArreglo);
+void impresionDatos(int64_t numero, int64_t* arregloFactores, int64_t* tamanioArreglo);
 
 
 #endif // PRIME_FACT_H

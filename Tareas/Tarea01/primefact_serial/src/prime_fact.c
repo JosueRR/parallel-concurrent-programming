@@ -8,9 +8,9 @@
 #include <limits.h>
 #include "prime_fact.h"
 
-uint64_t lecturaDatos(char* linea) {
+int64_t lecturaDatos(char* linea) {
     // Variable que almacena el posible número
-    uint64_t numero;
+    int64_t numero;
 
     // Se lee el posible número y se realizan las verificaciones a priori
     if (strlen(linea) && linea[0] != '-') {
@@ -18,10 +18,10 @@ uint64_t lecturaDatos(char* linea) {
         return numero;
     }
 
-    // En caso de que el número supera el espacio de uint64_t
+    // En caso de que el número supera el espacio de int64_t
     if (strtoull(linea, NULL, 10) == ULLONG_MAX && strstr(linea, "18446744073709551615") == NULL 
     && strlen(linea) >= strlen("18446744073709551615")) {
-        return numero = 18446744073709551615;
+        return numero = INVALID_NUMBER; // return numero = 18446744073709551615;
     }
 
     // En caso de ser 1 se considera como NA_1
@@ -34,14 +34,14 @@ uint64_t lecturaDatos(char* linea) {
         return numero = 0;
     }
 
-    // Datos que no sean números o sean negativos serán considerado invalid number
+    // Datos que no sean números o sean negativos serán considerados invalid number
     numero = strtoull(linea, NULL, 10);
     return numero;
 }
 
 // Calcula los factores primos y los agrega a un arreglo
 // Adaptado de URL: https://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
-uint64_t* calcularFactores(uint64_t numero, uint64_t* arregloFactores, uint64_t* tamanioArreglo) {
+int64_t* calcularFactores(int64_t numero, int64_t* arregloFactores, int64_t* tamanioArreglo) {
     // Caso: número == par, entonces 2 es factor
     while (!(numero % 2)) {
         arregloFactores = agregarElemento(2, arregloFactores, tamanioArreglo);
@@ -49,7 +49,7 @@ uint64_t* calcularFactores(uint64_t numero, uint64_t* arregloFactores, uint64_t*
     }
 
     // Caso: número debe ser impar
-    for (uint64_t i = 3; i <= (uint64_t) ceil(sqrt(numero)); i += 2) {
+    for (int64_t i = 3; i <= (int64_t) ceil(sqrt(numero)); i += 2) {
         while (!(numero % i)) {
             arregloFactores = agregarElemento(i, arregloFactores, tamanioArreglo);
             numero = numero / i;
@@ -64,12 +64,12 @@ uint64_t* calcularFactores(uint64_t numero, uint64_t* arregloFactores, uint64_t*
   return arregloFactores;
 }
 
-uint64_t* agregarElemento(uint64_t n, uint64_t* arregloFactores, uint64_t* tamanioArreglo) {
+int64_t* agregarElemento(int64_t n, int64_t* arregloFactores, int64_t* tamanioArreglo) {
     // Caso en que el arreglo ya está lleno, por lo tanto se crea uno nuevo (incluyendo los nuevos datos)
     if (arregloFactores[*tamanioArreglo - 1]) {
         // Se copian los datos en el arreglo nuevo
-        uint64_t* nueva_lista = (uint64_t*) calloc(*tamanioArreglo + 20, sizeof(uint64_t));
-        for (uint64_t i = 0; i < *tamanioArreglo; ++i) {
+        int64_t* nueva_lista = (int64_t*) calloc(*tamanioArreglo + 20, sizeof(int64_t));
+        for (int64_t i = 0; i < *tamanioArreglo; ++i) {
             nueva_lista[i] = arregloFactores[i];
         }
         // Se libera memoria y se copian los datos nuevos
@@ -79,7 +79,7 @@ uint64_t* agregarElemento(uint64_t n, uint64_t* arregloFactores, uint64_t* taman
     }
     // Se agrega el dato al arreglo
     char agregado = 0;
-    for (uint64_t i = 0; i < *tamanioArreglo && !agregado; ++i) {
+    for (int64_t i = 0; i < *tamanioArreglo && !agregado; ++i) {
         if (!arregloFactores[i]) {
             arregloFactores[i] = n;
             agregado = 1;
@@ -88,11 +88,11 @@ uint64_t* agregarElemento(uint64_t n, uint64_t* arregloFactores, uint64_t* taman
     return arregloFactores;
 }
 
-void impresionDatos(uint64_t numero, uint64_t* arregloFactores, uint64_t* tamanioArreglo) {
+void impresionDatos(int64_t numero, int64_t* arregloFactores, int64_t* tamanioArreglo) {
     // Variables para imprimir los datos
-    uint64_t indice = 0;
-    uint64_t factor = 0;
-    uint64_t potencia = 0;
+    int64_t indice = 0;
+    int64_t factor = 0;
+    int64_t potencia = 0;
     // Imprime el número
     printf("%" PRIu64 ":", numero);
 

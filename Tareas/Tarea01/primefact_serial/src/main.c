@@ -15,20 +15,20 @@ int main(int argc, char *argv[]) {
     FILE* entrada = stdin;
     // Almacenan la entrada del usuario
     char linea[25];
-    uint64_t datoLeido = 0;
+    int64_t datoLeido = 0;
     // Almacenan la lista de factores y su tamaño
-    uint64_t* arregloFactores = NULL;
-    uint64_t tamanioArreglo = 0;
+    int64_t* arregloFactores = NULL;
+    int64_t tamanioArreglo = 0;
 
     // Bucle que se repite mientras existan elementos
     while ((fscanf(entrada, "%s", linea) == 1)) {
         // En caso de un valor ser válido se obtienen los factores
         datoLeido = lecturaDatos(linea);
-        if ((datoLeido && datoLeido > 1) && (linea[0] != '-')
-        && (datoLeido != 18446744073709551615)) {
+        if ((datoLeido > 1) // if ((datoLeido && datoLeido > 1) && (linea[0] != '-')
+        && (datoLeido != INVALID_NUMBER)) {
             // Se calculan los factores y se imprimen
             tamanioArreglo = 30;
-            arregloFactores = (uint64_t*) calloc(tamanioArreglo, sizeof(uint64_t));
+            arregloFactores = (int64_t*) calloc(tamanioArreglo, sizeof(int64_t));
             if (arregloFactores) {
                 arregloFactores = calcularFactores(datoLeido, arregloFactores, &tamanioArreglo);
                 impresionDatos(datoLeido, arregloFactores, &tamanioArreglo);
