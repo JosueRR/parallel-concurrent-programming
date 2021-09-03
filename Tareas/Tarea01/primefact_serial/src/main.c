@@ -34,15 +34,12 @@ int main(int argc, char *argv[]) {
                 impresionDatos(datoLeido, arregloFactores, &tamanioArreglo);
                 free(arregloFactores);
             }
-        }
         // En caso de no ser válido se busca el tipo de error y se imprime
-        if ((linea[0] == '0')) {
+        } else if ((linea[0] == '0')) {
             printf("0: NA\n");
-        }
-        if (datoLeido == NA_1) {
+        } else if (datoLeido == NA_1) {
             printf("1: NA\n");
-        }
-        if ((linea[0] == '-')) {
+        } else if ((linea[0] == '-')) {
             printf("%" PRId64 ": ", datoLeido);
             printf("invalid number\n");
         } else {
