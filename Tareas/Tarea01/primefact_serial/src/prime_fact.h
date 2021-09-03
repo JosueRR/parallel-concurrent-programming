@@ -1,4 +1,8 @@
-// Contiene y define lo que compone la clase
+/*
+*   Copyright 2021 Josue Retana  - UCR
+*   
+*   Contiene y define lo que compone la clase
+*/
 
 #ifndef PRIME_FACT_H
 #define PRIME_FACT_H
@@ -52,4 +56,4 @@ int64_t* agregarElemento(int64_t numero, int64_t* arregloFactores, int64_t* tama
 */
 void impresionDatos(int64_t numero, int64_t* arregloFactores, int64_t* tamanioArreglo);
 
-#endif // PRIME_FACT_H
+#endif  // PRIME_FACT_H

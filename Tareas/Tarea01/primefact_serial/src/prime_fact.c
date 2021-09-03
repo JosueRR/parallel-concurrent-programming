@@ -1,4 +1,8 @@
-// Implementación de las subrutinas
+/*
+*   Copyright 2021 Josue Retana  - UCR
+*   
+*   Implementación de las subrutinas
+*/
 
 #include <stdint.h>
 #include <stdlib.h>
@@ -19,22 +23,23 @@ int64_t lecturaDatos(char* linea) {
     }
 
     // En caso de que el número supera el espacio de int64_t
-    if (strtoull(linea, NULL, 10) == ULLONG_MAX && strstr(linea, "18446744073709551615") == NULL 
+    if (strtoull(linea, NULL, 10) == ULLONG_MAX
+    && strstr(linea, "18446744073709551615") == NULL
     && strlen(linea) >= strlen("18446744073709551615")) {
-        return numero = INVALID_NUMBER; // return numero = 18446744073709551615;
+        return numero = INVALID_NUMBER;
     }
 
     // En caso de ser 1 se considera como NA_1
-    else if (linea[0] == 1) {
+    if (linea[0] == 1) {
         return numero = NA_1;
     }
 
     // En caso de ser 0 se considera como numero, pero inválido
-    else if (linea[0] == 0) {
+    if (linea[0] == 0) {
         return numero = 0;
     }
 
-    // Datos que no sean números o sean negativos serán considerados invalid number
+    // Todos los otros casos serán considerados invalid number
     numero = strtoull(linea, NULL, 10);
     return numero;
 }
@@ -105,11 +110,10 @@ void impresionDatos(int64_t numero, int64_t* arregloFactores, int64_t* tamanioAr
             ++potencia;
             ++indice;
         }
+        // Cuando la potencia es 1 se ignora
         if (potencia != 1) {
             printf(" %" PRIu64 "^%" PRIu64, factor, potencia);
-        }
-        // Cuando la potencia es 1 se ignora 
-        else {
+        } else {
             printf(" %" PRIu64, factor);
         }
     }

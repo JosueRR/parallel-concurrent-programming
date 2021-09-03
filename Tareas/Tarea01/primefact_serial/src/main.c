@@ -24,7 +24,7 @@ int main(int argc, char *argv[]) {
     while ((fscanf(entrada, "%s", linea) == 1)) {
         // En caso de un valor ser válido se obtienen los factores
         datoLeido = lecturaDatos(linea);
-        if ((datoLeido > 1) // if ((datoLeido && datoLeido > 1) && (linea[0] != '-')
+        if ((datoLeido > 1)
         && (datoLeido != INVALID_NUMBER)) {
             // Se calculan los factores y se imprimen
             tamanioArreglo = 30;
@@ -36,17 +36,16 @@ int main(int argc, char *argv[]) {
             }
         }
         // En caso de no ser válido se busca el tipo de error y se imprime
-        else if ((linea[0] == '0')) {
+        if ((linea[0] == '0')) {
             printf("0: NA\n");
         }
-        else if (datoLeido == NA_1) {
+        if (datoLeido == NA_1) {
             printf("1: NA\n");
         }
-        else if ((linea[0] == '-')) {
+        if ((linea[0] == '-')) {
             printf("%" PRId64 ": ", datoLeido);
             printf("invalid number\n");
-        }
-        else {
+        } else {
             printf("invalid number\n");
         }
     }
