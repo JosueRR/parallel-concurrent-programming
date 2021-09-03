@@ -10,6 +10,7 @@
 #include <string.h>
 #include <math.h>
 #include <limits.h>
+#include <ctype.h>
 #include "prime_fact.h"
 
 int64_t lecturaDatos(char* linea) {
@@ -17,10 +18,11 @@ int64_t lecturaDatos(char* linea) {
     int64_t numero;
 
     // Se lee el posible número y se realizan las verificaciones a priori
-    if (strlen(linea) && linea[0] != '-') {
+    if (strlen(linea) && linea[0] != '-' && linea[0] != '0' && linea[0] != '1' 
+    && linea[1] != '\0') {
         numero = strtoull(linea, NULL, 10);
         return numero;
-    }
+    } 
 
     // En caso de que el número supera el espacio de int64_t
     if (strtoull(linea, NULL, 10) == ULLONG_MAX
@@ -29,13 +31,18 @@ int64_t lecturaDatos(char* linea) {
         return numero = INVALID_NUMBER;
     }
 
+    // En caso de ser negativo se considera como INVALID_NUMBER
+    if ((linea[0] == '-') && isdigit(linea[1])) {
+        return numero = INVALID_NUMBER;
+    }
+
     // En caso de ser 1 se considera como NA_1
-    if (linea[0] == 1) {
+    if (linea[0] == '1' && linea[1] == '\0') {
         return numero = NA_1;
     }
 
     // En caso de ser 0 se considera como numero, pero inválido
-    if (linea[0] == 0) {
+    if (linea[0] == '0' && linea[1] == '\0') {
         return numero = 0;
     }
 
