@@ -1,0 +1,4 @@
+-999: invalid number
+-7896: invalid number
+-1: invalid number
+0: invalid number

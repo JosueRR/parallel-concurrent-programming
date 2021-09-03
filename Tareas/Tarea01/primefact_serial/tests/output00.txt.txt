@@ -1,0 +1,6 @@
+0: NA
+1: NA
+invalid number
+5: 5
+25: 5^2
+-9000: invalid number

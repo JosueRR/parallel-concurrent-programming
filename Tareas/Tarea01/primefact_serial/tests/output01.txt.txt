@@ -1,0 +1,5 @@
+0: NA
+5: 5
+1400: 2^3 5^2 7
+invalid number
+-5: invalid number
