@@ -39,9 +39,8 @@ int64_t lecturaDatos(char* linea) {
     return numero;
 }
 
-// Calcula los factores primos y los agrega a un arreglo
-// Adaptado de URL: https://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
 int64_t* calcularFactores(int64_t numero, int64_t* arregloFactores, int64_t* tamanioArreglo) {
+    // Adaptado de URL: https://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
     // Caso: número == par, entonces 2 es factor
     while (!(numero % 2)) {
         arregloFactores = agregarElemento(2, arregloFactores, tamanioArreglo);
@@ -68,14 +67,14 @@ int64_t* agregarElemento(int64_t n, int64_t* arregloFactores, int64_t* tamanioAr
     // Caso en que el arreglo ya está lleno, por lo tanto se crea uno nuevo (incluyendo los nuevos datos)
     if (arregloFactores[*tamanioArreglo - 1]) {
         // Se copian los datos en el arreglo nuevo
-        int64_t* nueva_lista = (int64_t*) calloc(*tamanioArreglo + 20, sizeof(int64_t));
+        int64_t* arregloCopia = (int64_t*) calloc(*tamanioArreglo + 20, sizeof(int64_t));
         for (int64_t i = 0; i < *tamanioArreglo; ++i) {
-            nueva_lista[i] = arregloFactores[i];
+            arregloCopia[i] = arregloFactores[i];
         }
         // Se libera memoria y se copian los datos nuevos
         free(arregloFactores);
         *tamanioArreglo += 20;
-        arregloFactores = nueva_lista;
+        arregloFactores = arregloCopia;
     }
     // Se agrega el dato al arreglo
     char agregado = 0;
@@ -93,6 +92,7 @@ void impresionDatos(int64_t numero, int64_t* arregloFactores, int64_t* tamanioAr
     int64_t indice = 0;
     int64_t factor = 0;
     int64_t potencia = 0;
+
     // Imprime el número
     printf("%" PRIu64 ":", numero);
 
