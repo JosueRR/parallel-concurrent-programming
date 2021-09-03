@@ -1,4 +1,0 @@
-error
-hola5
-p5000
-o
