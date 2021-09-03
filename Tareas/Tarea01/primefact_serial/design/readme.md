@@ -28,7 +28,7 @@ La solución del proble se va modularizar en las siguientes subrutinas:
 - agregarElemento: agrega un elemento a un arreglo.
 - impresionDatos: imprime los resultados de la solución.
  
-## _Diagrama de General en UML_
+## _Diagrama General en UML_
 
 ![Diagrama General UML](https://lucid.app/publicSegments/view/3af809c4-4a78-49a8-a18b-f138e7af44f7/image.png)
 https://lucid.app/publicSegments/view/3af809c4-4a78-49a8-a18b-f138e7af44f7/image.png
