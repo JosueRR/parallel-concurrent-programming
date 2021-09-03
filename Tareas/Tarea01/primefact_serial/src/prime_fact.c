@@ -68,7 +68,7 @@ int64_t* calcularFactores(int64_t numero, int64_t* arregloFactores, int64_t* tam
   return arregloFactores;
 }
 
-int64_t* agregarElemento(int64_t n, int64_t* arregloFactores, int64_t* tamanioArreglo) {
+int64_t* agregarElemento(int64_t numero, int64_t* arregloFactores, int64_t* tamanioArreglo) {
     // Caso en que el arreglo ya está lleno, por lo tanto se crea uno nuevo (incluyendo los nuevos datos)
     if (arregloFactores[*tamanioArreglo - 1]) {
         // Se copian los datos en el arreglo nuevo
@@ -85,7 +85,7 @@ int64_t* agregarElemento(int64_t n, int64_t* arregloFactores, int64_t* tamanioAr
     char agregado = 0;
     for (int64_t i = 0; i < *tamanioArreglo && !agregado; ++i) {
         if (!arregloFactores[i]) {
-            arregloFactores[i] = n;
+            arregloFactores[i] = numero;
             agregado = 1;
         }
     }
