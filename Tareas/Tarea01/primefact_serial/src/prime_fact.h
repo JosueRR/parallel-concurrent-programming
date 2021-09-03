@@ -5,8 +5,11 @@
 #include <stdint.h>
 #include <stdio.h>
 
+/*Códigos para posibles errores*/
+// En caso de que sea un dato inválido
 #define INVALID_NUMBER 0
-#define NA 1
+// En caso de que el número sea 1
+#define NA_1 1
 
 /* Métodos */
 
