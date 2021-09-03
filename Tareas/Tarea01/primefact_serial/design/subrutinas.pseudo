@@ -1,0 +1,63 @@
+/*
+*   Copyright 2021 Josue Retana  - UCR
+*   
+*   Pseudocodigo de las subrutinas que componen el proyecto
+*/
+
+// Se encarga de leer una linea y asigna un valor según el caso
+procedure lecturaDatos(char linea)
+    if (not_vacio  and not_negativo) {
+        return convertirNumero(linea)
+    }
+    if (out_of_bounds) {
+        return INVALID_NUMBER
+    }
+    if (linea == 1) {
+        return numeroUno
+    }
+    if (linea == 0) {
+        return numeroCero
+    }
+    else {
+        return cualquierOtroCaso
+    }
+end procedure
+
+// Calcula los factores de un número
+procedure calcularFactores
+    // Adaptado de URL: https://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
+
+    // 2 es factor
+    mientras (!(numero % 2)) {
+        agregarElemento(2)
+        numero = numero / i
+    }
+
+    // Es impar
+    mientras (indice = 3; indice <= (int64_t) ceil(sqrt(numero)); indice += 2) {
+        agregarElemento(indice)
+    }
+
+    // Número primo mayor a 2
+    if (numero > 2) {
+        agregarElemento numero
+    }
+end procedure
+
+// Agrega un número a un arreglo
+procedure agregarElemento
+    if (arreglo_lleno) {
+        copiaArreglo = originalArreglo
+    }
+
+    libera_memoria
+    agregarValor
+    return arregloNuevo
+end procedure
+
+// Imprime en consola un número y sus factores primos
+procedure impresionDatos
+    imprimir_numero
+    mientras(quedenValoresEnArreglo)
+        imprimir lista de factores
+end procedure
