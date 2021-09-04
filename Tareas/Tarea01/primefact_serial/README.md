@@ -30,7 +30,9 @@ Debe abrir una terminal dentro de la carpeta bin. Existen dos formas de interact
 
 **Para la opción número 1**:
 Ingrese a la carpeta bin, abra una terminal, ingrese el siguiente comando:
+
 `./primefact_serial`
+
 Para finalizar el programa presione las teclas:
 `Ctrl + d`
 **Para la opción número 2**:
