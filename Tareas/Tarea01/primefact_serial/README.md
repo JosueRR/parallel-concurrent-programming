@@ -25,7 +25,9 @@ Ingrese el comando:
 Esto generará la contrucción de todo el proyecto, además de algunas verificaciones.
 ## ¿Cómo correr el programa?
 Debe abrir una terminal dentro de la carpeta bin. Existen dos formas de interactuar con el programa:
+
 **1.** Ingresar números uno, por uno: se imprimirá con cada ingreso, visualmente será de forma gradual.
+
 **2.** Redirigir la entrada con un archivo: se imprimirá el resultado de lo almacenado en el archivo, visualmente será instantaneo.
 
 **Para la opción número 1**:
@@ -34,50 +36,83 @@ Ingrese a la carpeta bin, abra una terminal, ingrese el siguiente comando:
 `./primefact_serial`
 
 Para finalizar el programa presione las teclas:
+
 `Ctrl + d`
+
 **Para la opción número 2**:
 Ingrese a la carpeta bin, abra una terminal, ingrese el siguiente comando:
+
 `./primefact_serial < nombreArchivo.txt`
+
 Reemplace nombreArchivo por el nombre de su archivo.
 
 ## ¿Cómo remover los archivos y carpetas generados por el programa?
 Para esto ingrese el comando:
+
 `make clean`
 
 ## ¿Qué otras comprobaciones puedo realizar?
 Se pueden verificar si existen **fugas de memoria** con el comando:
+
 `make memcheck`
+
 Se pueden verificar si existen **errores o mala legibilidad en el código** con el comando:
+
 `make lint`
+
 Se puede **generar documentación en Doxygen** con el comando:
+
 `make doc`
+
 Se pueden detectar **thread errors** con el comando:
+
 `make helgrind`
+
 Se pueden realizar **todas las verificaciones anteriores** con el comando:
+
 `make all`
 
 ## Algunos ejemplos en terminal
 Cuando se ingresan datos de uno por uno debería verse la siguiente forma:
+
 `./primefact_serial`
+
 ` 0`
+
 `0: NA`
+
 `-1`
+
 `-1: invalid number`
+
 Cuando se ingresan datos con txt debería verse la siguiente forma:
+
 `./primefact_serial < input000.txt`
+
 `0: NA`
+
 `2: 2`
+
 `9: 3^2`
+
 `10: 2 5`
+
 `52: 2^2 13`
+
 `81: 3^4`
+
 `100: 2^2 5^2`
+
 `113: 113`
+
 `180: 2^2 3^2 5`
+
 `1000: 2^3 5^3`
+
 `1024: 2^10`
 
 ## _Créditos_
 
 **Autor**: Josué Retana Rodríguez
+
 **Correo**: josue.retanarodriguez@ucr.ac.cr
