@@ -36,7 +36,8 @@ int64_t lecturaDatos(char* linea);
  @param tamanioArreglo contiene el tamaño del arreglo
  @return un arreglo tipo int64_t que contiene los factores del número
 */
-int64_t* calcularFactores(int64_t numero, int64_t* arregloFactores, int64_t* tamanioArreglo);
+int64_t* calcularFactores(int64_t numero, int64_t*
+arregloFactores, int64_t* tamanioArreglo);
 
 /**
  @brief Agrega elementos a un arreglo
@@ -45,7 +46,8 @@ int64_t* calcularFactores(int64_t numero, int64_t* arregloFactores, int64_t* tam
  @param tamanioArreglo contiene el tamaño del arreglo
  @return un arreglo tipo int64_t
 */
-int64_t* agregarElemento(int64_t numero, int64_t* arregloFactores, int64_t* tamanioArreglo);
+int64_t* agregarElemento(int64_t numero, int64_t*
+arregloFactores, int64_t* tamanioArreglo);
 
 /**
  @brief Imprime en consola el numero y sus factores primos
@@ -54,6 +56,7 @@ int64_t* agregarElemento(int64_t numero, int64_t* arregloFactores, int64_t* tama
  @param tamanioArreglo contiene el tamaño del arreglo
  @return no retorna valores, sin embargo el finalizar en salida estándar se tendrá el número seguido de la lista de factores primos
 */
-void impresionDatos(int64_t numero, int64_t* arregloFactores, int64_t* tamanioArreglo);
+void impresionDatos(int64_t numero, int64_t*
+arregloFactores, int64_t* tamanioArreglo);
 
 #endif  // PRIME_FACT_H

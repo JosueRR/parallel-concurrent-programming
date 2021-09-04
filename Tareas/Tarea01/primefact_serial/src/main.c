@@ -29,9 +29,11 @@ int main(int argc, char *argv[]) {
         && (datoLeido != INVALID_NUMBER)) {
             // Se calculan los factores y se imprimen
             tamanioArreglo = 30;
-            arregloFactores = (int64_t*) calloc(tamanioArreglo, sizeof(int64_t));
+            arregloFactores = (int64_t*)
+            calloc(tamanioArreglo, sizeof(int64_t));
             if (arregloFactores) {
-                arregloFactores = calcularFactores(datoLeido, arregloFactores, &tamanioArreglo);
+                arregloFactores = calcularFactores(datoLeido,
+                arregloFactores, &tamanioArreglo);
                 impresionDatos(datoLeido, arregloFactores, &tamanioArreglo);
                 free(arregloFactores);
             }
