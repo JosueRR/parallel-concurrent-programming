@@ -3,4 +3,4 @@ invalid number
 -1: invalid number
 -9223372036854775807: invalid number
 -9223372036854775808: invalid number
-invalid number
+-9223372036854775809: invalid number
