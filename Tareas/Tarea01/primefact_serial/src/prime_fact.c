@@ -4,14 +4,13 @@
 *   Implementación de las subrutinas
 */
 
+#include <ctype.h>
+#include <inttypes.h>
+#include <limits.h>
+#include <math.h>
 #include <stdint.h>
 #include <stdlib.h>
-#include <inttypes.h>
 #include <string.h>
-#include <math.h>
-#include <limits.h>
-#include <ctype.h>
-#include <errno.h>
 #include "prime_fact.h"
 
 /* LECTURA Y VALIDACIÓN */
