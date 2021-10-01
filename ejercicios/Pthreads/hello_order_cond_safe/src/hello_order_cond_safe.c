@@ -1,4 +1,4 @@
-// Copyright 2021 Josué Retana - UCR
+// Copyright 2021 Jeisson Hidalgo <jeisson.hidalgo@ucr.ac.cr> CC-BY 4.0
 
 #include <assert.h>
 #include <inttypes.h>
@@ -8,11 +8,12 @@
 #include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
-#include <semaphore.h>
+
+#define MAX_GREET_LEN 256
 
 // thread_shared_data_t
 typedef struct shared_data {
-  sem_t* can_greet;
+  char** greets;
   uint64_t thread_count;
 } shared_data_t;
 
@@ -44,31 +45,24 @@ int main(int argc, char* argv[]) {
 
   shared_data_t* shared_data = (shared_data_t*)calloc(1, sizeof(shared_data_t));
   if (shared_data) {
-    shared_data->can_greet = (sem_t*) calloc(thread_count, sizeof(sem_t));
+    shared_data->greets = (char**) calloc(thread_count, sizeof(char*));
     shared_data->thread_count = thread_count;
 
-    for (uint64_t thread_number = 0; thread_number < shared_data->thread_count
-        ; ++thread_number) {
-      // can_greet[thread_number] := create_semaphore(not thread_number)
-      error = sem_init(&shared_data->can_greet[thread_number], /*pshared*/ 0
-        , /*value*/ !thread_number);
-    }
-
-    if (shared_data->can_greet) {
+    if (shared_data->greets) {
       struct timespec start_time, finish_time;
-      clock_gettime(CLOCK_MONOTONIC, &start_time);
+      // clock_gettime(CLOCK_MONOTONIC, &start_time);
 
       error = create_threads(shared_data);
 
-      clock_gettime(CLOCK_MONOTONIC, &finish_time);
-      double elapsed_time = finish_time.tv_sec - start_time.tv_sec +
-        (finish_time.tv_nsec - start_time.tv_nsec) * 1e-9;
+      // clock_gettime(CLOCK_MONOTONIC, &finish_time);
+      // double elapsed_time = finish_time.tv_sec - start_time.tv_sec +
+      //   (finish_time.tv_nsec - start_time.tv_nsec) * 1e-9;
 
-      printf("Execution time: %.9lfs\n", elapsed_time);
+      // printf("Execution time: %.9lfs\n", elapsed_time);
 
-      free(shared_data->can_greet);
+      free(shared_data->greets);
     } else {
-      fprintf(stderr, "Error: could not allocate semaphores\n");
+      fprintf(stderr, "Error: could not allocate greets\n");
       error = 13;
     }
     free(shared_data);
@@ -90,7 +84,11 @@ int create_threads(shared_data_t* shared_data) {
   if (threads && private_data) {
     for (uint64_t thread_number = 0; thread_number < shared_data->thread_count
         ; ++thread_number) {
-      if (error == EXIT_SUCCESS) {
+      shared_data->greets[thread_number] = (char*)
+        malloc(MAX_GREET_LEN * sizeof(char));
+      if (shared_data->greets[thread_number]) {
+        // *shared_data->greets[thread_number] = '\0';
+        shared_data->greets[thread_number][0] = '\0';
         private_data[thread_number].thread_number = thread_number;
         private_data[thread_number].shared_data = shared_data;
         // create_thread(greet, thread_number)
@@ -102,7 +100,6 @@ int create_threads(shared_data_t* shared_data) {
           error = 21;
           break;
         }
-
       } else {
         fprintf(stderr, "Error: could not init semaphore\n");
         error = 22;
@@ -116,15 +113,22 @@ int create_threads(shared_data_t* shared_data) {
     for (uint64_t thread_number = 0; thread_number < shared_data->thread_count
         ; ++thread_number) {
       pthread_join(threads[thread_number], /*value_ptr*/ NULL);
-      sem_destroy(&shared_data->can_greet[thread_number]);
     }
+
+    // for thread_number := 0 to thread_count do
+    for (uint64_t thread_number = 0; thread_number < shared_data->thread_count
+        ; ++thread_number) {
+      // print greets[thread_number]
+      printf("%s\n", shared_data->greets[thread_number]);
+      free(shared_data->greets[thread_number]);
+    }  // end for
 
     free(private_data);
     free(threads);
   } else {
     fprintf(stderr, "Error: could not allocate %" PRIu64 " threads\n"
       , shared_data->thread_count);
-    error = 23;
+    error = 22;
   }
 
   return error;
@@ -136,27 +140,11 @@ void* greet(void* data) {
   private_data_t* private_data = (private_data_t*) data;
   shared_data_t* shared_data = private_data->shared_data;
 
-  // Wait until it is my turn
-  // wait(can_greet[thread_number])
-  int error = sem_wait(&shared_data->can_greet[private_data->thread_number]);
-  if (error) {
-    fprintf(stderr, "error: could not wait for semaphore\n");
-  }
-
-  // print "Hello from secondary thread"
-  printf("Hello from secondary thread %" PRIu64 " of %" PRIu64 "\n"
+  // greets[thread_number] := format("Hello from secondary thread"
+  // , thread_number, " of ", thread_count)
+  sprintf(shared_data->greets[private_data->thread_number]
+    , "Hello from secondary thread %" PRIu64 " of %" PRIu64
     , private_data->thread_number, shared_data->thread_count);
-
-  // Allow subsequent thread to do the task
-  // signal(can_greet[(thread_number + 1) mod thread_count])
-  const uint64_t next_thread = (private_data->thread_number + 1)
-    % shared_data->thread_count;
-
-  error = sem_post(&shared_data->can_greet[next_thread]);
-  if (error) {
-    fprintf(stderr, "error: could not increment semaphore\n");
-  }
 
   return NULL;
 }  // end procedure
-
