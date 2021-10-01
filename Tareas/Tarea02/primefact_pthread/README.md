@@ -19,7 +19,7 @@ contiene un número ingresado seguido de su factorización prima. A continuació
 | -40 | -40: invalid number |
 | prueba | invalid number |
 
-Se puede encontrar más información del diseño [aquí](https://github.com/JosueRR/ppc21b-04-josue_retana/blob/v1.0/Tareas/Tarea01/primefact_serial/design/readme.md).
+Se puede encontrar más información del diseño [aquí](https://github.com/JosueRR/ppc21b-04-josue_retana/blob/master/Tareas/Tarea02/primefact_pthread/design/readme.md).
 
 # _Manual de Usuario_
 ## ¿Cómo construir el proyecto?
