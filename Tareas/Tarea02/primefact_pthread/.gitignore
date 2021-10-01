@@ -4,3 +4,5 @@ src/main
 build/
 doc/
 .vscode
+tests/input014
+tests/output014
