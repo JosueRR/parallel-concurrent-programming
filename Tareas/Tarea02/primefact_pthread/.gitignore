@@ -1,0 +1,6 @@
+src/.vscode
+bin/
+src/main
+build/
+doc/
+.vscode
