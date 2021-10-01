@@ -189,7 +189,7 @@ arregloFactores, int64_t* tamanioArreglo) {
 /* IMPRESIÓN */
 
 void printArregloFactores(int64_t numero,
-int64_t* arregloFactores, int64_t* tamanioArreglo) {
+int64_t* arregloFactores, int64_t* tamanioArregloFactores) {
     // Variables para imprimir los datos
     int64_t indice = 0;
     int64_t factor = 0;
@@ -199,7 +199,7 @@ int64_t* arregloFactores, int64_t* tamanioArreglo) {
     printf("%" PRIu64 ":", numero);
 
     // Se imprimen las potencias y factores del arreglo
-    while (arregloFactores[indice] && indice < *tamanioArreglo) {
+    while (arregloFactores[indice] && indice < *tamanioArregloFactores) {
         factor = arregloFactores[indice];
         potencia = 0;
 

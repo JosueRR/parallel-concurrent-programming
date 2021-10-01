@@ -130,11 +130,11 @@ arregloFactores, int64_t* tamanioArreglo);
  @brief Imprime en consola el numero y sus factores primos
  @param numero el numero base que se imprime
  @param arregloFactores un arreglo que contiene los factores del número
- @param tamanioArreglo contiene el tamaño del arreglo
+ @param tamanioArregloFactores contiene el tamaño del arreglo
  @return no retorna valores, sin embargo el finalizar en salida estándar se tendrá el número seguido de la lista de factores primos
 */
 void printArregloFactores(int64_t numero, int64_t*
-arregloFactores, int64_t* tamanioArreglo);
+arregloFactores, int64_t* tamanioArregloFactores);
 
 /**
  @brief Imprime en consola el resultado de la entrada del usuario

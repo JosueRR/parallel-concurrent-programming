@@ -13,7 +13,7 @@ int main() {
     // Almacena las entradas del usuario
     EstructuraArreglo arreglo;
 
-    // Crea el arreglo
+    // Crea el arreglo de entradas
     initArray(&arreglo, BLOCK_SIZE);
     arreglo = lecturaDatos(entrada, arreglo);
 
