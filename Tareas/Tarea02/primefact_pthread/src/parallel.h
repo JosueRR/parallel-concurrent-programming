@@ -40,9 +40,8 @@ typedef struct private_data {
  @param argc argumento del usuario indica cantidad de hilos
  @param argv argumento del usuario indica cantidad de hilos
  @param arreglo representa el arreglo de entradas
- @return arreglo con los números factoriales calculados.
 */
-EstructuraArreglo initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo);
+void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo);
 
 /**
  @brief Reparte los números entre la cantidad de hilos
