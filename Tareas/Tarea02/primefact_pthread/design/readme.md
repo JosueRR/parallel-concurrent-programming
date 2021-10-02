@@ -69,4 +69,4 @@ La solución del problema se va modularizar en las siguientes subrutinas:
 
 ## _Diagrama de Memoria_ ##
 
-![Diagrama Memoria]()
+![Diagrama Memoria](https://lucid.app/publicSegments/view/0cf26748-ce23-4e50-b318-b7a957a3b2db/image.png)
