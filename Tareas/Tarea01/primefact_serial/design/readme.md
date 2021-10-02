@@ -32,3 +32,7 @@ La solución del proble se va modularizar en las siguientes subrutinas:
 
 ![Diagrama General UML](https://lucid.app/publicSegments/view/3af809c4-4a78-49a8-a18b-f138e7af44f7/image.png)
 https://lucid.app/publicSegments/view/3af809c4-4a78-49a8-a18b-f138e7af44f7/image.png
+
+## _Diagrama de Memoria_
+
+![Diagrama de Memoria](https://github.com/JosueRR/ppc21b-04-josue_retana/blob/master/Tareas/Tarea02/primefact_pthread/design/Diagrama_Memoria.png)
