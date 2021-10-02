@@ -6,7 +6,10 @@
 
 #include <stdlib.h>
 #include "prime_fact.h"
-#include "paralelizacion.h"
+#include "parallel.h"
+
+// Para comprobar tiempos
+#include <time.h>
 
 int main(int argc, char* argv[]) {
     // Almacena la entrada del usuario
@@ -18,12 +21,11 @@ int main(int argc, char* argv[]) {
     initArray(&arreglo, BLOCK_SIZE);
     arreglo = lecturaDatos(entrada, arreglo);
 
-
     // Calcula factores de forma paralela
-    arreglo = initParalelizador(argc, argv, arreglo);
+    initParalelizador(argc, argv, arreglo);
 
     // Imprime el resultado
-   printResult(arreglo);
+    printResult(arreglo);
 
     // Libera memoria
     for (int i = 0; i < arreglo.usado; i++) {
