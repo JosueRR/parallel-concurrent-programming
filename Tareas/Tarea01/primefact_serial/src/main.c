@@ -7,6 +7,9 @@
 #include <stdlib.h>
 #include "prime_fact.h"
 
+// Para comprobar tiempos
+#include <time.h>
+
 int main() {
     // Almacena la entrada del usuario
     FILE* entrada = stdin;
