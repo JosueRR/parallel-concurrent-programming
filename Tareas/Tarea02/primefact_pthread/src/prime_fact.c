@@ -205,6 +205,7 @@ int64_t* arregloFactores, int64_t* tamanioArregloFactores) {
             ++potencia;
             ++indice;
         }
+        
         // Cuando la potencia es 1 se ignora
         if (potencia != 1) {
             printf(" %" PRIu64 "^%" PRIu64, factor, potencia);
