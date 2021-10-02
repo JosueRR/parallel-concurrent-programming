@@ -8,9 +8,6 @@
 #include "prime_fact.h"
 #include "parallel.h"
 
-// Para comprobar tiempos
-#include <time.h>
-
 int main(int argc, char* argv[]) {
     // Almacena la entrada del usuario
     FILE* entrada = stdin;

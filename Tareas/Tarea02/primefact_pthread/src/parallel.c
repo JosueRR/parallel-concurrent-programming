@@ -24,13 +24,13 @@ void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo) {
         }
     }
     // Set shared_data
-    shared_data_t* shared_data = (shared_data_t*)calloc(1, sizeof(shared_data_t));
+    shared_data_t* shared_data = (shared_data_t*)
+    calloc(1, sizeof(shared_data_t));
     if (shared_data) {
         shared_data->listaDatos = arreglo;
         shared_data->thread_count = thread_count;
 
         if (shared_data->listaDatos.arreglo) {
-
             createThreads(shared_data);
         }
         free(shared_data);
@@ -51,9 +51,9 @@ void repartirTareas(shared_data_t* shared_data, private_data_t* private_data) {
     }
 
     bool continuar = true;
-    for (int64_t thread_number = 0; thread_number < shared_data->thread_count; ++thread_number) {
+    for (int64_t thread_number = 0; thread_number < shared_data->thread_count;
+    ++thread_number) {
         if (continuar) {
-
         // Verifica que aún hayan tareas pr hacer
         if (indiceFinal >= cantidadNumeros) {
             indiceFinal = cantidadNumeros;
@@ -85,15 +85,16 @@ void createThreads(shared_data_t* shared_data) {
         malloc(shared_data->thread_count * sizeof(pthread_t));
     private_data_t* private_data = (private_data_t*)
         calloc(shared_data->thread_count, sizeof(private_data_t));
-    
     // Le asigna a cada hilo un índice de donde empezar y de donde finalizar
     if (threads && private_data) {
         repartirTareas(shared_data, private_data);
 
         // Crea los hilos
-        for (int64_t thread_number = 0; thread_number < shared_data->thread_count; ++thread_number) {
+        for (int64_t thread_number = 0;
+         thread_number < shared_data->thread_count; ++thread_number) {
             private_data[thread_number].shared_data = shared_data;
-            error = pthread_create(&threads[thread_number], /*attr*/ NULL, calcularParallel
+            error = pthread_create(&threads[thread_number],
+            /*attr*/ NULL, calcularParallel
             , /*arg*/ &private_data[thread_number]);
             if (error == EXIT_SUCCESS) {
             } else {
@@ -102,9 +103,8 @@ void createThreads(shared_data_t* shared_data) {
             }
         }
         // Limpia la memoria
-        for (int64_t thread_number = 0; thread_number < shared_data->thread_count
-        ; ++thread_number) {
-
+        for (int64_t thread_number = 0;
+        thread_number < shared_data->thread_count; ++thread_number) {
             pthread_join(threads[thread_number], /*value_ptr*/ NULL);
         }
         free(private_data);
@@ -120,8 +120,10 @@ void* calcularParallel(void* data) {
     assert(data);
     private_data_t* private_data = (private_data_t*) data;
     if (private_data->tieneTrabajo) {
-        for (int64_t i = private_data->indiceBase; i <= private_data->indiceFinal ; ++i) {
-            private_data->shared_data->listaDatos.arreglo[i] = calcularFactores(private_data->shared_data->listaDatos.arreglo[i]);
+        for (int64_t i = private_data->indiceBase;
+        i <= private_data->indiceFinal ; ++i) {
+            private_data->shared_data->listaDatos.arreglo[i]=
+            calcularFactores(private_data->shared_data->listaDatos.arreglo[i]);
         }
     }
     return NULL;

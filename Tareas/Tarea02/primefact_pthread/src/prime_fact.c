@@ -130,17 +130,18 @@ BloqueDatos calcularFactores(BloqueDatos entrada) {
         int64_t numero = entrada.numero;
 
         if (entrada.arregloFactores) {
-            
             // Caso: número == par, entonces 2 es factor
             while (!(numero % 2)) {
-                entrada.arregloFactores = agregarFactor(2, entrada.arregloFactores, &entrada.tamanioArregloFactores);
+                entrada.arregloFactores = agregarFactor(2,
+                entrada.arregloFactores, &entrada.tamanioArregloFactores);
                 numero = numero / 2;
             }
 
             // Caso: número debe ser impar
             for (int64_t i = 3; i <= (int64_t) ceil(sqrt(numero)); i += 2) {
                 while (!(numero % i)) {
-                    entrada.arregloFactores = agregarFactor(i, entrada.arregloFactores,
+                    entrada.arregloFactores = agregarFactor(i,
+                    entrada.arregloFactores,
                     &entrada.tamanioArregloFactores);
                     numero = numero / i;
                 }
@@ -148,7 +149,8 @@ BloqueDatos calcularFactores(BloqueDatos entrada) {
 
             // Caso: número es un primo mayor a 2
             if (numero > 2) {
-                entrada.arregloFactores = agregarFactor(numero, entrada.arregloFactores,
+                entrada.arregloFactores = agregarFactor(numero,
+                entrada.arregloFactores,
                 &entrada.tamanioArregloFactores);
             }
 
@@ -205,7 +207,6 @@ int64_t* arregloFactores, int64_t* tamanioArregloFactores) {
             ++potencia;
             ++indice;
         }
-        
         // Cuando la potencia es 1 se ignora
         if (potencia != 1) {
             printf(" %" PRIu64 "^%" PRIu64, factor, potencia);
