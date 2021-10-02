@@ -35,4 +35,4 @@ https://lucid.app/publicSegments/view/3af809c4-4a78-49a8-a18b-f138e7af44f7/image
 
 ## _Diagrama de Memoria_
 
-![Diagrama de Memoria](https://github.com/JosueRR/ppc21b-04-josue_retana/blob/master/Tareas/Tarea02/primefact_pthread/design/Diagrama_Memoria.png)
+![Diagrama de Memoria](https://github.com/JosueRR/ppc21b-04-josue_retana/blob/master/Tareas/Tarea01/primefact_serial/design/Diagrama_Memoria.png)
