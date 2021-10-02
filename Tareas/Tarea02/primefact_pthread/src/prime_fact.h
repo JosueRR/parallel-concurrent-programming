@@ -25,7 +25,7 @@
 /**
  @brief Almacena todos los datos relacionados a una entrada por parte del usuario
  @param charIngreso almacena el char que ingreso el usuario
- @param validos indica si es o no, un número válido para calcular los factores
+ @param valido indica si es o no, un número válido para calcular los factores
  @param numero almacena el número a calculos los factores
  @param arregloFactores almacena un arreglo con los factores del número
  @param tamanioArregloFactores almacena el tamaño de arregloFactores

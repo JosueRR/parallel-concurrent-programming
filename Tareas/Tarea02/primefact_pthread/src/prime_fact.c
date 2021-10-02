@@ -194,7 +194,6 @@ int64_t* arregloFactores, int64_t* tamanioArregloFactores) {
     int64_t indice = 0;
     int64_t factor = 0;
     int64_t potencia = 0;
-
     // Imprime el número
     printf("%" PRIu64 ":", numero);
 
