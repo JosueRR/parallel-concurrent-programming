@@ -38,96 +38,42 @@ void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo) {
 }
 
 void repartirTareas(shared_data_t* shared_data, private_data_t* private_data) {
-    int64_t cantidad_entradas = shared_data->listaDatos.usado;
-    //int64_t entradas_por_trabajador;
-    int64_t entradas_por_trabajador = cantidad_entradas / shared_data->thread_count;
-   // printf("Size cantidad_entradas" "%" PRIu64 "\n", cantidad_entradas);
-   // printf("Size trabajadores" "%" PRIu64 "\n", shared_data->thread_count);
-   // Si hay más hilos que entradas por default solo procesan una por hilo
-    if (shared_data->thread_count > cantidad_entradas) {
-        entradas_por_trabajador = 1;
-         //printf("entro 1\n");
-    } else {
-        // Se distribuyen las entradas entre los hilos
-        //printf("entro 2\n");
-        //entradas_por_trabajador = ceil(cantidad_entradas / shared_data->thread_count);
-        //printf("Entradas por trabajador " "%" PRIu64 "\n", entradas_por_trabajador);
+    // Almacena cantidad de entradas
+    int64_t cantidadNumeros = shared_data->listaDatos.usado;
+    // Almacena cantidad de entradas que se deben procesar por hilo
+    int64_t numerosPorHilo = cantidadNumeros / shared_data->thread_count;
+    // Almacena el valor del índice final a asignar
+    int64_t indiceFinal = 0;
+
+    // Si hilos > numeros, por default solo se procesa un número por hilo
+    if (shared_data->thread_count > cantidadNumeros) {
+        numerosPorHilo = 1;
     }
 
-    int64_t ultimo_indice = 0;
     bool continuar = true;
-    for (int64_t i = 0; i < shared_data->thread_count; ++i) {
-         //printf("OJO ULTIMO INDICE ----->" "%" PRIu64 "\n", ultimo_indice);
-       //  printf("entro 3\n");
+    for (int64_t thread_number = 0; thread_number < shared_data->thread_count; ++thread_number) {
         if (continuar) {
-        private_data[i].tieneTrabajo = true;
-        private_data[i].indiceBase = ultimo_indice;
-        ultimo_indice += entradas_por_trabajador;
-        // Verifica si ya no hay indices para el siguiente trabajadaro
-        if (ultimo_indice >= cantidad_entradas) {
-            ultimo_indice = cantidad_entradas;
+
+        // Verifica que aún hayan tareas pr hacer
+        if (indiceFinal >= cantidadNumeros) {
+            indiceFinal = cantidadNumeros;
             continuar = false;
         }
-        // Verifica si ya no quedan más trabajadores, y toma el resto de trabajos
-        if (i == shared_data->thread_count - 1) {
-            ultimo_indice = cantidad_entradas;
+
+        // Asigna el hilo con tarea
+        private_data[thread_number].tieneTrabajo = true;
+        private_data[thread_number].indiceBase = indiceFinal;
+        indiceFinal += numerosPorHilo;
+
+        // Si ya no hay más hilos, se le asigna el resto de tareas al último
+        if (thread_number == shared_data->thread_count - 1) {
+            indiceFinal = cantidadNumeros;
         }
-         private_data[i].indiceFinal = ultimo_indice - 1;
+         private_data[thread_number].indiceFinal = indiceFinal - 1;
         } else {
-         private_data[i].tieneTrabajo = false;
+         private_data[thread_number].tieneTrabajo = false;
         }
     }
-
-    // for (int contadorHilos = 0; contadorHilos < shared_data->thread_count; contadorHilos++) {
-    //     printf("El hilo %i\n",contadorHilos);
-    //     if (private_data[contadorHilos].tieneTrabajo)
-    //     {
-    //         printf("Tiene trabajo\n");
-    //     } else {
-    //         printf("No tiene trabajo\n");
-    //     }
-    //     printf("El indice inicial es: " "%" PRIu64 "\n", private_data[contadorHilos].indiceBase);
-    //     printf("El indice final es: " "%" PRIu64 "\n", private_data[contadorHilos].indiceFinal);
-    //     printf("-------------------------\n");
-    // }
-
-
-//     int64_t cantidad_entradas = shared_data->listaDatos.usado;
-//     int64_t entradas_por_trabajador;
-//    // printf("Size cantidad_entradas" "%" PRIu64 "\n", cantidad_entradas);
-//    // printf("Size trabajadores" "%" PRIu64 "\n", shared_data->thread_count);
-//     if (shared_data->thread_count > cantidad_entradas) {
-//         entradas_por_trabajador = 1;
-//          //printf("entro 1\n");
-//     } else {
-//         //printf("entro 2\n");
-//         entradas_por_trabajador = cantidad_entradas / shared_data->thread_count;
-//     }
-
-//     int64_t ultimo_indice = 0;
-//     bool continuar = true;
-//     for (int64_t i = 0; i < shared_data->thread_count; ++i) {
-//          //printf("OJO ULTIMO INDICE ----->" "%" PRIu64 "\n", ultimo_indice);
-//        //  printf("entro 3\n");
-//         if (continuar) {
-//         private_data[i].tieneTrabajo = true;
-//         private_data[i].indiceBase = ultimo_indice;
-//         ultimo_indice += entradas_por_trabajador;
-//         // Verifica si ya no hay indices para el siguiente trabajadaro
-//         if (ultimo_indice >= cantidad_entradas) {
-//             ultimo_indice = cantidad_entradas;
-//             continuar = false;
-//         }
-//         // Verifica si ya no quedan más trabajadores, y toma el resto de trabajos
-//         if (i == shared_data->thread_count - 1) {
-//             ultimo_indice = cantidad_entradas;
-//         }
-//          private_data[i].indiceFinal = ultimo_indice - 1;
-//         } else {
-//          private_data[i].tieneTrabajo = false;
-//         }
-//     }
-    
 }
 
 void createThreads(shared_data_t* shared_data) {

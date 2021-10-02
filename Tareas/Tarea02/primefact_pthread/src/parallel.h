@@ -44,7 +44,7 @@ typedef struct private_data {
 void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo);
 
 /**
- @brief Reparte los números entre la cantidad de hilos
+ @brief Reparte los números entre la cantidad de hilos por medio de mapeo por bloques
  @param shared_data datos compartidos entre hilos
  @param private_data datos privados de los hilos
 */
