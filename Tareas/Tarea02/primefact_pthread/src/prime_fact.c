@@ -166,13 +166,13 @@ arregloFactores, int64_t* tamanioArreglo) {
     if (arregloFactores[*tamanioArreglo - 1]) {
         // Se copian los datos en el arreglo nuevo
         int64_t* arregloCopia = (int64_t*)
-        calloc(*tamanioArreglo + 20, sizeof(int64_t));
+        calloc(*tamanioArreglo + BLOCK_SIZE, sizeof(int64_t));
         for (int64_t i = 0; i < *tamanioArreglo; ++i) {
             arregloCopia[i] = arregloFactores[i];
         }
         // Se libera memoria y se copian los datos nuevos
         free(arregloFactores);
-        *tamanioArreglo += 20;
+        *tamanioArreglo += BLOCK_SIZE;
         arregloFactores = arregloCopia;
     }
     // Se agrega el dato al arreglo
