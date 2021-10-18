@@ -1,0 +1,8 @@
+src/.vscode
+bin/
+src/main
+build/
+doc/
+.vscode
+tests/input014.txt
+tests/output014.txt
