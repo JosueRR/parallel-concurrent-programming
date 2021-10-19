@@ -14,9 +14,12 @@
 /**
  @brief Datos compartidos entre hilos
  @param thread_count almacena la cantidad de hilos
+ @param unit_count cantidad de entradas
  @param listaDatos arreglo de entradas
- @param next_unit contador, siguiente unidad a ser comsumida
- @param can_access_next_unit mutex para controlar accesos
+ @param next_unit siguiente unidad a ser comsumida
+ @param consumed_count contador de entradas consumidas
+ @param can_access_next_unit mutex para next_unit
+ @param can_access_consumed_count mutex para consumed_count
 */
 typedef struct shared_data {
   int64_t thread_count;
@@ -30,16 +33,13 @@ typedef struct shared_data {
 
 /**
  @brief Datos privados de los hilos
- @param tieneTrabajo indica si el hilos tiene trabajo por hacer
- @param indiceBase indice del inicio del rango sobre el cual debe trabajar el hilo
- @param indiceFinal indice del final del rango sobre el cual debe trabajar el hilo
+ @param thread_number identificador de número de hilo
+ @param my_unit indice en el cual debe trabajar el hilo
  @param shared_data puntero a la memoria compartida entre hilos
 */
 typedef struct private_data {
-  bool tieneTrabajo;
   int64_t thread_number;
   int64_t my_unit;
-  int64_t indiceFinal;
   shared_data_t* shared_data;
 } private_data_t;
 
@@ -55,6 +55,7 @@ void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo);
 /**
  @brief Reparte indices a hilos según lleguen
  @param shared_data datos compartidos entre hilos
+ @param shared_data datos privados de los hilos
 */
 void repartirTareas(shared_data_t* shared_data, private_data_t* private_data);
 

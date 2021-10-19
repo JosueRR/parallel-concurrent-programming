@@ -63,7 +63,6 @@ void repartirTareas(shared_data_t* shared_data, private_data_t* private_data) {
 void createThreads(shared_data_t* shared_data) {
     // Almacena valor de un posible error
     int error = EXIT_SUCCESS;
-
     // Arreglo de pthreads y memoria privada
     pthread_t* threads = (pthread_t*)
         malloc(shared_data->thread_count * sizeof(pthread_t));
@@ -77,7 +76,7 @@ void createThreads(shared_data_t* shared_data) {
         for (int64_t thread_number = 0;
          thread_number < shared_data->thread_count; ++thread_number) {
             private_data[thread_number].shared_data = shared_data;
-            /*OJO BORRAR*/ private_data[thread_number].thread_number = thread_number;
+            private_data[thread_number].thread_number = thread_number;
             error = pthread_create(&threads[thread_number],
             /*attr*/ NULL, calcularParallel
             , /*arg*/ &private_data[thread_number]);
@@ -120,6 +119,5 @@ void* calcularParallel(void* data) {
         private_data->shared_data->listaDatos.arreglo[private_data->my_unit]=
         calcularFactores(private_data->shared_data->listaDatos.arreglo[private_data->my_unit]);
     }
-
     return NULL;
 }
