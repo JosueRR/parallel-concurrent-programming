@@ -30,13 +30,18 @@ void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo) {
         shared_data->listaDatos = arreglo;
         shared_data->thread_count = thread_count;
         shared_data->next_unit = 0;
+        shared_data->consumed_count = 0;
+        shared_data->unit_count = arreglo.usado;
         error = pthread_mutex_init(&shared_data->can_access_next_unit,
+            /*attr*/ NULL);
+        error = pthread_mutex_init(&shared_data->can_access_consumed_count,
             /*attr*/ NULL);
         if (error == EXIT_SUCCESS) {
             if (shared_data->listaDatos.arreglo) {
                 createThreads(shared_data);
             }
             pthread_mutex_destroy(&shared_data->can_access_next_unit);
+            pthread_mutex_destroy(&shared_data->can_access_consumed_count);
             free(shared_data);
         } else {
             fprintf(stderr, "Error: could not init mutex\n");
@@ -46,13 +51,13 @@ void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo) {
     }
 }
 
-int64_t repartirTareas(shared_data_t* shared_data) {
+void repartirTareas(shared_data_t* shared_data, private_data_t* private_data) {
     int64_t index_a_trabajar = 0;
     pthread_mutex_lock(&shared_data->can_access_next_unit);
     index_a_trabajar = shared_data->next_unit;
     shared_data->next_unit += 1;
+    private_data->my_unit = index_a_trabajar;
     pthread_mutex_unlock(&shared_data->can_access_next_unit);
-    return index_a_trabajar;
 }
 
 void createThreads(shared_data_t* shared_data) {
@@ -72,7 +77,7 @@ void createThreads(shared_data_t* shared_data) {
         for (int64_t thread_number = 0;
          thread_number < shared_data->thread_count; ++thread_number) {
             private_data[thread_number].shared_data = shared_data;
-            /*OJO BORRAR*/ private_data[thread_number].indiceBase = thread_number;
+            /*OJO BORRAR*/ private_data[thread_number].thread_number = thread_number;
             error = pthread_create(&threads[thread_number],
             /*attr*/ NULL, calcularParallel
             , /*arg*/ &private_data[thread_number]);
@@ -100,26 +105,20 @@ void* calcularParallel(void* data) {
     assert(data);
     private_data_t* private_data = (private_data_t*) data;
     shared_data_t* shared_data = private_data->shared_data;
-    int64_t unit_count = shared_data->listaDatos.usado;
-    int64_t start_index = 0;
-    int64_t fin = 0;
-    
 
-    // while (true) {
-    //     pthread_mutex_lock(&shared_data->can_access_next_unit);
-    // }
-    
-
-
-    while (start_index < unit_count) {
-        start_index = repartirTareas(shared_data);
-        fin = start_index + 1;
-        for (int64_t i = start_index; i < fin && i < unit_count; ++i) {
-            //printf("Hola from thread%" PRIu64 "\n", private_data->indiceBase);
-            private_data->shared_data->listaDatos.arreglo[start_index]=
-            calcularFactores(private_data->shared_data->listaDatos.arreglo[start_index]);
+    // Mientras existan elementos por calcular
+    while (true) {
+        pthread_mutex_lock(&shared_data->can_access_consumed_count);
+        if (shared_data->consumed_count < shared_data->unit_count) {
+            shared_data->consumed_count = shared_data->consumed_count + 1;
+        } else {
+            pthread_mutex_unlock(&shared_data->can_access_consumed_count);
+            break;
         }
-        //printf("Valor de index %" PRIu64 "\n", start_index);
+        pthread_mutex_unlock(&shared_data->can_access_consumed_count);
+        repartirTareas(shared_data, private_data);
+        private_data->shared_data->listaDatos.arreglo[private_data->my_unit]=
+        calcularFactores(private_data->shared_data->listaDatos.arreglo[private_data->my_unit]);
     }
 
     return NULL;

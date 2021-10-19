@@ -20,8 +20,11 @@
 */
 typedef struct shared_data {
   int64_t thread_count;
+  int64_t unit_count;
   int64_t next_unit;
+  int64_t consumed_count;
   pthread_mutex_t can_access_next_unit;
+  pthread_mutex_t can_access_consumed_count;
   EstructuraArreglo listaDatos;
 } shared_data_t;
 
@@ -34,7 +37,8 @@ typedef struct shared_data {
 */
 typedef struct private_data {
   bool tieneTrabajo;
-  int64_t indiceBase;
+  int64_t thread_number;
+  int64_t my_unit;
   int64_t indiceFinal;
   shared_data_t* shared_data;
 } private_data_t;
@@ -52,7 +56,7 @@ void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo);
  @brief Reparte indices a hilos según lleguen
  @param shared_data datos compartidos entre hilos
 */
-int64_t repartirTareas(shared_data_t* shared_data);
+void repartirTareas(shared_data_t* shared_data, private_data_t* private_data);
 
 /**
  @brief Crea los hilos y los ejecuta
