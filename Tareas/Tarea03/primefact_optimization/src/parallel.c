@@ -66,12 +66,13 @@ void createThreads(shared_data_t* shared_data) {
         calloc(shared_data->thread_count, sizeof(private_data_t));
     // Le asigna a cada hilo un índice de donde empezar y de donde finalizar
     if (threads && private_data) {
-        repartirTareas(shared_data);
+        //repartirTareas(shared_data);
 
         // Crea los hilos
         for (int64_t thread_number = 0;
          thread_number < shared_data->thread_count; ++thread_number) {
             private_data[thread_number].shared_data = shared_data;
+            /*OJO BORRAR*/ private_data[thread_number].indiceBase = thread_number;
             error = pthread_create(&threads[thread_number],
             /*attr*/ NULL, calcularParallel
             , /*arg*/ &private_data[thread_number]);
@@ -98,12 +99,28 @@ void createThreads(shared_data_t* shared_data) {
 void* calcularParallel(void* data) {
     assert(data);
     private_data_t* private_data = (private_data_t*) data;
-    if (private_data->tieneTrabajo) {
-        for (int64_t i = private_data->indiceBase;
-        i <= private_data->indiceFinal ; ++i) {
-            private_data->shared_data->listaDatos.arreglo[i]=
-            calcularFactores(private_data->shared_data->listaDatos.arreglo[i]);
+    shared_data_t* shared_data = private_data->shared_data;
+    int64_t unit_count = shared_data->listaDatos.usado;
+    int64_t start_index = 0;
+    int64_t fin = 0;
+    
+
+    // while (true) {
+    //     pthread_mutex_lock(&shared_data->can_access_next_unit);
+    // }
+    
+
+
+    while (start_index < unit_count) {
+        start_index = repartirTareas(shared_data);
+        fin = start_index + 1;
+        for (int64_t i = start_index; i < fin && i < unit_count; ++i) {
+            //printf("Hola from thread%" PRIu64 "\n", private_data->indiceBase);
+            private_data->shared_data->listaDatos.arreglo[start_index]=
+            calcularFactores(private_data->shared_data->listaDatos.arreglo[start_index]);
         }
+        //printf("Valor de index %" PRIu64 "\n", start_index);
     }
+
     return NULL;
 }
