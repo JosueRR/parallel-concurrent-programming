@@ -49,11 +49,10 @@ typedef struct private_data {
 void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo);
 
 /**
- @brief Reparte los números entre la cantidad de hilos por medio de mapeo por bloques
+ @brief Reparte indices a hilos según lleguen
  @param shared_data datos compartidos entre hilos
- @param private_data datos privados de los hilos
 */
-void repartirTareas(shared_data_t* shared_data, private_data_t* private_data);
+int64_t repartirTareas(shared_data_t* shared_data);
 
 /**
  @brief Crea los hilos y los ejecuta

@@ -32,10 +32,11 @@ void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo) {
         shared_data->next_unit = 0;
         error = pthread_mutex_init(&shared_data->can_access_next_unit,
             /*attr*/ NULL);
-        if (error == EXIT_SUCCESS) {      
+        if (error == EXIT_SUCCESS) {
             if (shared_data->listaDatos.arreglo) {
                 createThreads(shared_data);
             }
+            pthread_mutex_destroy(&shared_data->can_access_next_unit);
             free(shared_data);
         } else {
             fprintf(stderr, "Error: could not init mutex\n");
@@ -45,43 +46,13 @@ void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo) {
     }
 }
 
-void repartirTareas(shared_data_t* shared_data, private_data_t* private_data) {
-    // Almacena cantidad de entradas
-    int64_t cantidadNumeros = shared_data->listaDatos.usado;
-    // Almacena cantidad de entradas que se deben procesar por hilo
-    int64_t numerosPorHilo = cantidadNumeros / shared_data->thread_count;
-    // Almacena el valor del índice final a asignar
-    int64_t indiceFinal = 0;
-
-    // Si hilos > numeros, por default solo se procesa un número por hilo
-    if (shared_data->thread_count > cantidadNumeros) {
-        numerosPorHilo = 1;
-    }
-
-    bool continuar = true;
-    for (int64_t thread_number = 0; thread_number < shared_data->thread_count;
-    ++thread_number) {
-        if (continuar) {
-        // Verifica que aún hayan tareas pr hacer
-        if (indiceFinal >= cantidadNumeros) {
-            indiceFinal = cantidadNumeros;
-            continuar = false;
-        }
-
-        // Asigna el hilo con tarea
-        private_data[thread_number].tieneTrabajo = true;
-        private_data[thread_number].indiceBase = indiceFinal;
-        indiceFinal += numerosPorHilo;
-
-        // Si ya no hay más hilos, se le asigna el resto de tareas al último
-        if (thread_number == shared_data->thread_count - 1) {
-            indiceFinal = cantidadNumeros;
-        }
-         private_data[thread_number].indiceFinal = indiceFinal - 1;
-        } else {
-         private_data[thread_number].tieneTrabajo = false;
-        }
-    }
+int64_t repartirTareas(shared_data_t* shared_data) {
+    int64_t index_a_trabajar = 0;
+    pthread_mutex_lock(&shared_data->can_access_next_unit);
+    index_a_trabajar = shared_data->next_unit;
+    shared_data->next_unit += 1;
+    pthread_mutex_unlock(&shared_data->can_access_next_unit);
+    return index_a_trabajar;
 }
 
 void createThreads(shared_data_t* shared_data) {
@@ -95,7 +66,7 @@ void createThreads(shared_data_t* shared_data) {
         calloc(shared_data->thread_count, sizeof(private_data_t));
     // Le asigna a cada hilo un índice de donde empezar y de donde finalizar
     if (threads && private_data) {
-        repartirTareas(shared_data, private_data);
+        repartirTareas(shared_data);
 
         // Crea los hilos
         for (int64_t thread_number = 0;
