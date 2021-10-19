@@ -7,7 +7,6 @@
 #include "parallel.h"
 #include <assert.h>
 #include <inttypes.h>
-#include <pthread.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -15,6 +14,7 @@
 
 
 void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo) {
+    int error = EXIT_SUCCESS;
     // Set cantidad de hilos
     uint64_t thread_count = sysconf(_SC_NPROCESSORS_ONLN);
     if (argc == 2) {
@@ -29,11 +29,19 @@ void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo) {
     if (shared_data) {
         shared_data->listaDatos = arreglo;
         shared_data->thread_count = thread_count;
-
-        if (shared_data->listaDatos.arreglo) {
-            createThreads(shared_data);
+        shared_data->next_unit = 0;
+        error = pthread_mutex_init(&shared_data->can_access_next_unit,
+            /*attr*/ NULL);
+        if (error == EXIT_SUCCESS) {      
+            if (shared_data->listaDatos.arreglo) {
+                createThreads(shared_data);
+            }
+            free(shared_data);
+        } else {
+            fprintf(stderr, "Error: could not init mutex\n");
         }
-        free(shared_data);
+    } else {
+        fprintf(stderr, "Error: could not allocate shared data\n");
     }
 }
 

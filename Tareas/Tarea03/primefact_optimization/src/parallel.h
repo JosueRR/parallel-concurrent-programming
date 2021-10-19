@@ -7,6 +7,7 @@
 #ifndef PARALLEL_H
 #define PARALLEL_H
 #include "prime_fact.h"
+#include <pthread.h>
 
 /* Structs */
 
@@ -14,6 +15,8 @@
  @brief Datos compartidos entre hilos
  @param thread_count almacena la cantidad de hilos
  @param listaDatos arreglo de entradas
+ @param next_unit contador, siguiente unidad a ser comsumida
+ @param can_access_next_unit mutex para controlar accesos
 */
 typedef struct shared_data {
   int64_t thread_count;
