@@ -17,6 +17,8 @@
 */
 typedef struct shared_data {
   int64_t thread_count;
+  int64_t next_unit;
+  pthread_mutex_t can_access_next_unit;
   EstructuraArreglo listaDatos;
 } shared_data_t;
 
