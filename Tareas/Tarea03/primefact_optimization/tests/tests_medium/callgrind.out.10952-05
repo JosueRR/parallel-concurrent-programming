@@ -1,0 +1,891 @@
+# callgrind format
+version: 1
+creator: callgrind-3.15.0
+pid: 10952
+cmd:  bin/primefact_optimization
+part: 1
+thread: 5
+
+
+desc: I1 cache: 
+desc: D1 cache: 
+desc: LL cache: 
+
+desc: Timerange: Basic block 0 - 890915
+desc: Trigger: Program termination
+
+positions: line
+events: Ir
+summary: 1840298
+
+
+ob=(2) ???
+fl=(18) ???
+fn=(668) 0x00000000049a38f0
+0 2
+cob=(3) /usr/lib/x86_64-linux-gnu/libc-2.31.so
+cfi=(197) /build/glibc-eX1tMB/glibc-2.31/misc/../sysdeps/unix/sysv/linux/getpagesize.c
+cfn=(672) getpagesize
+calls=1 27 
+0 6
+
+fn=(648) 0x00000000001092b0
+0 12
+cob=(3)
+cfi=(151) /build/glibc-eX1tMB/glibc-2.31/malloc/malloc.c
+cfn=(650) calloc
+calls=6 3366 
+0 2763
+
+fn=(750) 0x00000000049a37b0
+0 2
+cob=(3)
+cfi=(205) /build/glibc-eX1tMB/glibc-2.31/stdlib/cxa_thread_atexit_impl.c
+cfn=(754) __call_tls_dtors
+calls=1 145 
+0 12
+
+fn=(720) 0x00000000001092d0
+0 26
+cob=(5) /usr/lib/x86_64-linux-gnu/libpthread-2.31.so
+cfi=(157) /build/glibc-eX1tMB/glibc-2.31/nptl/pthread_mutex_unlock.c
+cfn=(506) pthread_mutex_unlock
+calls=13 356 
+0 247
+
+fn=(740) 0x0000000000109340
+0 130976
+cob=(4) /usr/lib/x86_64-linux-gnu/libm-2.31.so
+cfi=(202) /build/glibc-eX1tMB/glibc-2.31/math/w_sqrt_compat.c
+cfn=(742) sqrt
+calls=65488 30 
+0 523904
+
+fn=(746) 0x0000000000109350
+0 130976
+cob=(4)
+cfi=(204) /build/glibc-eX1tMB/glibc-2.31/math/../sysdeps/x86_64/fpu/multiarch/s_ceil-sse4_1.S
+cfn=(748) __ceil_sse41
+calls=65488 22 
+0 196464
+
+fn=(708) 0x00000000049a3950
+0 2
+cob=(3)
+cfi=(136) /build/glibc-eX1tMB/glibc-2.31/ctype/ctype-info.c
+cfn=(418) __ctype_init
+calls=1 29 
+0 17
+
+fn=(770) 0x00000000049e4330
+0 2
+cob=(3)
+cfi=(151)
+cfn=(772) free
+calls=1 3087 
+0 10
+
+fn=(756) 0x00000000049a3840
+0 2
+cob=(3)
+cfi=(206) /build/glibc-eX1tMB/glibc-2.31/malloc/thread-freeres.c
+cfn=(760) __libc_thread_freeres
+calls=1 31 
+0 648
+
+fn=(712) 0x00000000049a37d0
+0 2
+cob=(3)
+cfi=(146) /build/glibc-eX1tMB/glibc-2.31/setjmp/../sysdeps/x86_64/bsd-_setjmp.S
+cfn=(474) _setjmp
+calls=1 28 
+0 34
+
+fn=(778) 0x00000000049a39c0
+0 2
+cob=(3)
+cfi=(199) /build/glibc-eX1tMB/glibc-2.31/misc/../sysdeps/unix/syscall-template.S
+cfn=(782) madvise
+calls=1 78 
+0 6
+
+fn=(718) 0x0000000000109380
+0 26
+cob=(5)
+cfi=(155) /build/glibc-eX1tMB/glibc-2.31/nptl/../nptl/pthread_mutex_lock.c
+cfn=(496) pthread_mutex_lock
+calls=13 64 
+0 377
+
+ob=(3)
+fl=(199)
+fn=(782)
+78 5
++1 1
+
+fn=(734) munmap
+78 5
++1 1
+
+fn=(684) mprotect
+78 5
++1 1
+
+fl=(205)
+fn=(754)
+145 4
++1 4
++18 4
+
+fl=(153) /build/glibc-eX1tMB/glibc-2.31/malloc/arena.c
+fn=(728) get_free_list
+761 1
+-3 3
++3 1
+-3 1
++28 5
+
+fn=(732) new_heap
+454 1
++6 1
+-6 4
++1 2
++5 2
++2 2
++13 1
+-7 3
++7 2
++13 7
+cfi=(198) /build/glibc-eX1tMB/glibc-2.31/misc/../sysdeps/unix/sysv/linux/mmap64.c
+cfn=(678) mmap
+calls=1 48 
+* 20
++1 2
++2 1
++1 1
++2 4
++3 1
++1 4
+cfi=(199)
+cfn=(734)
+calls=1 78 
+* 6
++17 4
+cfi=(199)
+cfn=(684)
+calls=1 78 
+* 6
+* 2
++6 3
++2 1
++2 7
+
+fn=(774) __malloc_arena_thread_freeres
+947 8
+fi=(151)
+2947 2
++2 2
++5 2
+-1 1
++1 1
+3124 1
+2954 1
++6 192
+-2 192
++10 2
+cfn=(772)
+calls=1 3087 
+* 141
+fe=(153)
+953 2
++1 1
++2 2
++2 3
++3 3
++1 3
++5 3
++2 8
+-5 1
++1 1
+-1 1
++1 1
+-7 4
++9 4
+
+fn=(730) arena_get2.part.0
+873 7
++10 4
++2 3
++23 3
++12 7
+-33 2
++23 7
+693 3
+cfn=(732)
+calls=1 454 
+* 87
+* 1
++2 2
++9 3
+fi=(151)
+1795 2
++3 4
+-3 2
++3 504
+-3 252
++7 3
++2 1
++3 1
+fe=(153)
+712 1
+-1 1
+-5 1
++2 3
++5 2
++1 2
++2 1
+-1 1
++1 3
++2 1
++1 2
++1 1
++1 1
++2 3
++3 2
++5 1
++2 3
++2 3
+-61 2
++63 3
++12 7
+-12 4
+-4 4
+-10 4
++12 4
+
+fl=(201) /build/glibc-eX1tMB/glibc-2.31/misc/../sysdeps/unix/sysv/linux/x86_64/clone.S
+fn=(704) clone
+78 1
++1 1
++1 1
++10 1
++3 1
++1 1
++1 1
+cob=(5)
+cfi=(195) /build/glibc-eX1tMB/glibc-2.31/nptl/pthread_create.c
+cfn=(706) start_thread
+calls=1 379 
+* 1840291
+
+fl=(147) /build/glibc-eX1tMB/glibc-2.31/setjmp/../sysdeps/x86_64/setjmp.S
+fn=(476) __sigsetjmp
+30 1
++2 1
++9 1
++1 2
++1 1
++4 1
++1 1
++1 1
++1 1
++1 1
++2 2
++2 1
++1 1
++1 1
++2 2
++2 1
++5 1
++1 1
++17 1
+cfi=(148) /build/glibc-eX1tMB/glibc-2.31/setjmp/sigjmp.c
+cfn=(478) __sigjmp_save
+calls=1 -56 
+* 9
+
+fl=(210) /build/glibc-eX1tMB/glibc-2.31/string/strerror_l.c
+fn=(768) __strerror_thread_freeres
+61 1
++1 3
+cob=(2)
+cfi=(18)
+cfn=(770)
+calls=1 -62 
+* 12
+
+fl=(207) /build/glibc-eX1tMB/glibc-2.31/sunrpc/rpc_thread.c
+fn=(762) __rpc_thread_destroy
+21 4
++1 2
++2 2
++15 4
+
+fl=(151)
+fn=(516) tcache_init.part.0
+2981 1
+-9 1
++9 3
++10 3
++7 2
++2 1
++1 2
+-1 1
++1 86
++3 2
+fi=(153)
+879 1
+cfn=(728)
+calls=1 761 
+* 11
+* 1
++1 5
+cfn=(730)
+calls=1 -7 
+* 958
+fe=(151)
+2982 4
+cfn=(520) _int_malloc
+calls=1 1208 
+* 130
+* 1
++1 2
++7 3
++1 4
+
+fn=(772)
+3087 4
++5 4
++1 4
++6 4
++5 1
+-2 1
++2 2
++18 3
++2 6
++1 1
++1 1
+-1 1
+cfn=(610) _int_free
+calls=1 4155 
+* 113
++1 2
+2978 4
+
+fn=(610)
+4155 11
++10 3
++6 5
++1 2
++4 4
++8 5
++36 2
+4428 11
+4295 2
++3 1
++3 4
++7 1
+-4 1
++4 2
++3 2
++5 3
++3 2
++1 2
++1 2
+1875 3
+4327 2
++9 2
++5 2
++4 1
++9 1
+-1 1
++2 2
++2 4
++2 2
++5 1
++1 1
++2 3
++1 1
++30 2
++20 3
++1 7
+4302 10
+
+fn=(520)
+1208 14
+3513 7
+1210 7
+3513 56
+1210 14
+3638 7
++2 7
+-2 7
++2 14
+1210 14
+3553 14
+1637 14
+3577 14
++58 2
+-53 12
++2 12
++5 21
+4147 95
+3637 21
++3 77
++77 7
++1 7
+-1 14
+-1 14
++2 14
+-2 18
++6 12
++73 18
+-67 18
+-6 2
++73 3
+-67 3
+3917 14
++73 14
++1 7
++1 7
+-1 7
++1 7
++1 14
++1 21
++5 14
++4 21
++3 28
+-3 21
++3 28
+-3 14
++3 18
++97 7
++1 14
++2 14
++3 21
++5 7
+-3 7
++1 14
++2 7
+-1 7
++1 7
++2 7
++3 7
+-5 35
++2 7
+1868 21
+
+fn=(650)
+3366 12
++10 6
+-10 24
++10 48
++8 12
++1 12
++9 18
++2 18
++32 18
+cfn=(520)
+calls=6 1208 
+* 846
+* 6
++2 30
++3 18
++14 12
++6 24
++52 42
+-44 6
++3 12
++11 6
++2 12
++2 12
++5 6
++2 6
+-2 6
++3 12
++2 6
++2 12
+-61 48
++20 6
++14 30
+-29 12
++7 12
++1 18
+2978 4
+cfn=(516)
+calls=1 +3 
+* 1222
+* 1
+3399 42
++7 6
++8 6
+-7 12
++7 12
++2 12
++1 30
+-18 24
++44 24
+
+fl=(209) /build/glibc-eX1tMB/glibc-2.31/resolv/resolv_context.c
+fn=(766) __resolv_context_freeres
+242 4
++2 1
+-2 2
++2 1
++1 1
++1 2
++6 6
+
+fl=(146)
+fn=(474)
+28 1
++2 1
++2 1
+cfi=(147)
+cfn=(476)
+calls=1 -2 
+* 31
+
+fl=(208) /build/glibc-eX1tMB/glibc-2.31/resolv/res-close.c
+fn=(764) __res_thread_freeres
+131 4
++1 1
+cfi=(209)
+cfn=(766)
+calls=1 242 
+* 17
++2 5
++8 4
+
+fl=(136)
+fn=(418)
+29 1
++2 7
++2 4
++2 4
++1 1
+
+fl=(206)
+fn=(760)
+31 2
++1 1
+cfi=(207)
+cfn=(762)
+calls=1 -11 
+* 12
++1 1
+cfi=(208)
+cfn=(764)
+calls=1 +98 
+* 31
++1 1
+cfi=(210)
+cfn=(768)
+calls=1 +27 
+* 16
++5 1
+-1 1
+cfi=(153)
+cfn=(774)
+calls=1 947 
+* 582
+
+fl=(148)
+fn=(478)
+28 3
++2 2
+-1 1
++5 3
+
+fl=(198)
+fn=(678)
+48 1
++3 2
+-3 4
++6 2
++5 6
++2 3
+-7 2
+
+fl=(197)
+fn=(672)
+27 1
++1 4
++2 1
+
+ob=(7) /home/josue/Desktop/Paralela/Tareas/Tarea03/primefact_optimization/bin/primefact_optimization
+fl=(150) /home/josue/Desktop/Paralela/Tareas/Tarea03/primefact_optimization/src/prime_fact.c
+fn=(724) calcularFactores
+122 36
++2 18
++3 24
+cob=(2)
+cfi=(18)
+cfn=(648)
+calls=6 0 
+* 2775
+-1 6
++4 12
++2 18
++2 6
++1 35
+cfn=(738) agregarFactor
+calls=7 +29 
+* 413
+* 7
++2 42
+-3 52
++7 12
++2 24
+cfn=(738)
+calls=4 +21 
+* 336
+* 4
++3 16
+-4 392916
+-1 196446
+cob=(2)
+cfi=(18)
+cfn=(740)
+calls=65482 0 
+* 654820
+* 12
+cob=(2)
+cfi=(18)
+cfn=(740)
+calls=6 0 
+* 60
+* 65488
+cob=(2)
+cfi=(18)
+cfn=(746)
+calls=65488 0 
+* 327440
+* 196464
++10 12
++1 30
+cfn=(738)
+calls=5 +12 
+* 341
+* 5
++5 144
++4 30
+
+fn=(738)
+164 112
++2 144
++13 16
++1 32
++1 266
++1 96
++1 16
+-3 360
++6 16
++1 32
+
+fl=(179) /home/josue/Desktop/Paralela/Tareas/Tarea03/primefact_optimization/src/parallel.c
+fn=(722) repartirTareas
+54 36
++1 6
++1 24
+cob=(2)
+cfi=(18)
+cfn=(718)
+calls=6 -56 
+* 186
++1 18
++1 30
++1 18
++1 24
+cob=(2)
+cfi=(18)
+cfn=(720)
+calls=6 -60 
+* 126
++1 18
+
+fn=(716) calcularParallel
+103 9
++1 2
++1 2
++1 3
++4 4
+cob=(2)
+cfi=(18)
+cfn=(718)
+calls=1 0 
+* 31
+* 24
+cob=(2)
+cfi=(18)
+cfn=(718)
+calls=6 0 
+* 186
++1 42
++1 36
++2 4
+cob=(2)
+cfi=(18)
+cfn=(720)
+calls=1 0 
+* 21
++1 1
++7 1
++1 3
+-6 24
+cob=(2)
+cfi=(18)
+cfn=(720)
+calls=6 0 
+* 126
++1 30
+cfn=(722)
+calls=6 -64 
+* 486
++2 78
+-1 78
++1 90
+cfi=(150)
+cfn=(724)
+calls=6 +2 
+* 1838044
+* 138
+-10 6
++13 3
+
+ob=(4)
+fl=(202)
+fn=(742)
+30 65488
++1 196464
++3 65488
+cfi=(203) /build/glibc-eX1tMB/glibc-2.31/math/../sysdeps/x86_64/fpu/e_sqrt.c
+cfn=(744) __sqrt_finite@GLIBC_2.15
+calls=65488 -9 
+* 196464
+
+fl=(204)
+fn=(748)
+22 65488
++1 65488
++1 65488
+
+fl=(203)
+fn=(744)
+25 65488
++3 65488
++3 65488
+
+ob=(5)
+fl=(195)
+fn=(706)
+379 2
++4 1
+-4 8
++4 2
++3 1
+cob=(2)
+cfi=(18)
+cfn=(708)
+calls=1 0 
+* 19
++3 4
++11 5
++8 2
++15 2
+cob=(2)
+cfi=(18)
+cfn=(712)
+calls=1 0 
+* 36
+* 1
++13 1
+-13 1
++13 1
++3 2
++3 2
++6 3
++15 2
++4 2
++10 3
+cob=(7)
+cfi=(179)
+cfn=(716)
+calls=1 103 
+* 1839472
++1 1
++7 1
+cob=(2)
+cfi=(18)
+cfn=(750)
+calls=1 0 
+* 14
+256 4
+491 1
+cob=(2)
+cfi=(18)
+cfn=(756)
+calls=1 0 
+* 650
++5 4
++5 3
++31 2
+fi=(196) /build/glibc-eX1tMB/glibc-2.31/nptl/allocatestack.c
+386 1
+cob=(2)
+cfi=(18)
+cfn=(668)
+calls=1 0 
+* 8
+fe=(195)
+567 1
+fi=(196)
+386 1
++2 5
++1 2
++1 2
+fe=(195)
+571 3
++3 3
+fi=(196)
+391 4
+cob=(2)
+cfi=(18)
+cfn=(778)
+calls=1 0 
+* 8
+* 1
+fe=(195)
+
+fl=(155)
+fn=(496)
+64 13
++3 39
++2 13
++2 26
+-7 26
++11 26
++2 39
++3 52
++1 39
++75 13
++3 13
++2 13
++3 13
++2 13
++1 39
+
+fl=(157)
+fn=(506)
+356 13
+41 39
++1 39
++5 26
++8 13
++3 13
+-6 13
++6 52
++2 13
+358 26
+
+totals: 1840298
