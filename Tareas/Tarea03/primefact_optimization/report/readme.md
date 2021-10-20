@@ -38,7 +38,7 @@ Como se puede observer en el análisis dinámico de código realizado la subruti
 
 **3.** _Modificaciones_
 
-Se intentará eliminar la operación de sqtr() actual; en su lugar, se eleverá el iterador al cuadro, tal cuestión permite verificarar los números de 3^2 a la raíz cuadrada de n^2, evitando así realizar operaciones de punto flotante que demandan un gran consumo de CPU.
+Siguiendo el consejo del profesor se usará una versión de factorización por rueda con 2 y 3 como bases (se agrega la 3 debido a que el algoritmo anterior ya incluía base 2). Además, se intentará eliminar la operación de sqtr() actual; en su lugar, se eleverá el iterador al cuadro, tal cuestión permite verificarar los números de 3^2 a la raíz cuadrada de n^2, evitando así realizar operaciones de punto flotante que demandan un gran consumo de CPU.
 
 **4.** _Rendimiento del código después de realizar las modificaciones_
 
