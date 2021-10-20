@@ -6,8 +6,8 @@
 
 #ifndef PARALLEL_H
 #define PARALLEL_H
-#include "prime_fact.h"
 #include <pthread.h>
+#include "prime_fact.h"
 
 /* Structs */
 

@@ -70,8 +70,6 @@ void createThreads(shared_data_t* shared_data) {
         calloc(shared_data->thread_count, sizeof(private_data_t));
     // Le asigna a cada hilo un índice de donde empezar y de donde finalizar
     if (threads && private_data) {
-        //repartirTareas(shared_data);
-
         // Crea los hilos
         for (int64_t thread_number = 0;
          thread_number < shared_data->thread_count; ++thread_number) {
@@ -117,7 +115,8 @@ void* calcularParallel(void* data) {
         pthread_mutex_unlock(&shared_data->can_access_consumed_count);
         repartirTareas(shared_data, private_data);
         private_data->shared_data->listaDatos.arreglo[private_data->my_unit]=
-        calcularFactores(private_data->shared_data->listaDatos.arreglo[private_data->my_unit]);
+        calcularFactores(private_data->shared_data->listaDatos.arreglo
+        [private_data->my_unit]);
     }
     return NULL;
 }
