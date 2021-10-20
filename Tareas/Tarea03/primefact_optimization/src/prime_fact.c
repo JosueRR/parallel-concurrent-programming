@@ -137,14 +137,26 @@ BloqueDatos calcularFactores(BloqueDatos entrada) {
                 numero = numero / 2;
             }
 
-            // Caso: número debe ser impar
-            for (int64_t i = 3; i <= (int64_t) ceil(sqrt(numero)); i += 2) {
-                while (!(numero % i)) {
-                    entrada.arregloFactores = agregarFactor(i,
+            // Caso: número == múltiplo de 3, entonces 3 es factor
+            while (!(numero % 3)) {
+                entrada.arregloFactores = agregarFactor(3,
+                entrada.arregloFactores, &entrada.tamanioArregloFactores);
+                numero = numero / 3;
+            }
+
+            // Caso: número primo entre 5 y sqtr cuadrada de numero
+            bool jmp = false;
+            for (int64_t index = 5; index*index <= numero; index += 2) {
+                while (!(numero % index)) {
+                    entrada.arregloFactores = agregarFactor(index,
                     entrada.arregloFactores,
                     &entrada.tamanioArregloFactores);
-                    numero = numero / i;
+                    numero = numero / index;
                 }
+                if (jmp) {
+                    index += 2;
+                }
+                jmp = !jmp;
             }
 
             // Caso: número es un primo mayor a 2
