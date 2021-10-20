@@ -47,3 +47,9 @@ Se obtuvo una duración de _104.88s_.
 **5.** _Lecciones Aprendidas_
 
 La diferencia entre los tiempos es de _60.29s_, lo cual es una gran diferencia a favor. A su vez el programa con solo una optimización tuvo un *speedup* y _efficiency_ respectivamente de _7.92_ y _0.99_, mientras que aplicando la segunda optimización se obtuvieron _12.48_ y _1.56_, esto representa en el programa un gran aumento a favor en todos los aspectos.
+
+## _Comparación de Optimizaciones_
+
+En general el caso más lento y menos eficiente corresponde al **serial**, este tuvo una duración de _1308.94s_; es un tiempo muy grande y se debe tomar en cuenta que solo se calcularon _40 061_ elementos. Con respecto a la **optimización 01** se obtuvo un incremento tanto a en el speedup como el efficiency, sin embargo no es tan grande, aún así considerando que se están utlizando una cantidad de recursos aproximadamente similares, definitivamente vale la pena incluir el mapeo dinámico. Finalmente la **optimización 02** es la que realmente marca un gran diferencia a favor del programa, modificar la subrutina de calcularFactores le brindó un speedup de _12.48s_ y una efficiency de _1.56_, estos son excelentes resultados que a su vez quedan retratados con la duración del programa, que es de tan solo _104.88s_. En general lo que produjo el ahora superior desempeño del programa fue: realizar un mapeo en tiempo de ejecución con el modelo productor-consumidor, utilizar una forma de factorización por rueda y evitar operaciones de punto flotante.
+
+![Grafico Optimizations](https://github.com/JosueRR/ppc21b-04-josue_retana/blob/master/Tareas/Tarea03/primefact_optimization/report/grafico_optimization.png)
