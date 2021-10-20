@@ -38,12 +38,12 @@ Como se puede observer en el análisis dinámico de código realizado la subruti
 
 **3.** _Modificaciones_
 
-Siguiendo el consejo del profesor se usará una versión de factorización por rueda con 2 y 3 como bases (se agrega la 3 debido a que el algoritmo anterior ya incluía base 2). Además, se intentará eliminar la operación de sqtr() actual; en su lugar, se eleverá el iterador al cuadro, tal cuestión permite verificarar los números de 3^2 a la raíz cuadrada de n^2, evitando así realizar operaciones de punto flotante que demandan un gran consumo de CPU.
+Siguiendo el consejo del profesor se usará una versión de factorización por rueda con 2 y 3 como bases (se agrega la 3 debido a que el algoritmo anterior ya incluía base 2). Además, se intentará eliminar la operación de sqtr() actual; en su lugar, se eleverá el iterador al cuadrado, tal cuestión permite verificarar los números de 5^2 a la raíz cuadrada de n^2, evitando así realizar operaciones de punto flotante, que demandan un gran consumo de CPU.
 
 **4.** _Rendimiento del código después de realizar las modificaciones_
 
-Se obtuvo una duración de _?_.
+Se obtuvo una duración de _104.88s_.
 
 **5.** _Lecciones Aprendidas_
 
- not_yet.
+La diferencia entre los tiempos es de _60.29s_, lo cual es una gran diferencia a favor. A su vez el programa con solo una optimización tuvo un *speedup* y _efficiency_ respectivamente de _7.92_ y _0.99_, mientras que aplicando la segunda optimización se obtuvieron _12.48_ y _1.56_, esto representa en el programa un gran aumento a favor en todos los aspectos.
