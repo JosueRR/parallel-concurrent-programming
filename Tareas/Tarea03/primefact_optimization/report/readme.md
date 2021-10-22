@@ -1,6 +1,6 @@
 # Documento de Reporte
 ## _Aspectos Generales_
-Para realizar el reporte se utilizó el caso de prueba **input021.txt**, que cuenta con 40 061 elementos a procesar.
+Para realizar el reporte se utilizó el caso de prueba **input021.txt**, que cuenta con 40 061 elementos a procesar. También, las pruebas se realizan en un cluster que cuenta con 8 CPUs.
 
 ## _Optimización 01 - Mapeo dinámico_
 
