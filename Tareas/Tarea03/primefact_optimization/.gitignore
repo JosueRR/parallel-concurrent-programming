@@ -7,3 +7,4 @@ doc/
 tests/input014.txt
 tests/output014.txt
 report/.~lock.perf_measure-tarea03.ods#
+tests/test_large
