@@ -36,7 +36,7 @@ Debe abrir una terminal dentro de la carpeta bin. Existen dos formas de interact
 **Para la opción número 1**:
 Ingrese a la carpeta bin, abra una terminal, ingrese el siguiente comando:
 
-`./primefact_serial`
+`./primefact_phtread`
 
 Para finalizar el programa presione las teclas:
 
@@ -45,9 +45,16 @@ Para finalizar el programa presione las teclas:
 **Para la opción número 2**:
 Ingrese a la carpeta bin, abra una terminal, ingrese el siguiente comando:
 
-`./primefact_serial < nombreArchivo.txt`
+`./primefact_phtread < nombreArchivo.txt`
 
 Reemplace nombreArchivo por el nombre de su archivo.
+
+## ¿Cómo establecer la cantidad de hilos?
+Ingrese como argumento la cantidad de hilos que desea crear, si no se ingresa ningún número se crearán tantos hilos como CPUs tenga la maquina donde se corre.
+
+Crea ocho hilos: `./primefact_phtread 8`
+
+Default hilos: `./primefact_phtread `
 
 ## ¿Cómo remover los archivos y carpetas generados por el programa?
 Para esto ingrese el comando:
@@ -78,7 +85,7 @@ Se pueden realizar **todas las verificaciones anteriores** con el comando:
 ## Algunos ejemplos en terminal
 Cuando se ingresan datos de uno por uno debería verse la siguiente forma:
 
-`./primefact_serial`
+`./primefact_phtread`
 
 ` 0`
 
@@ -90,7 +97,7 @@ Cuando se ingresan datos de uno por uno debería verse la siguiente forma:
 
 Cuando se ingresan datos con txt debería verse la siguiente forma:
 
-`./primefact_serial < input000.txt`
+`./primefact_phtread < input000.txt`
 
 `0: NA`
 
