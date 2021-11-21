@@ -1,0 +1,121 @@
+/*
+*   Copyright 2021 Josue Retana  - UCR
+*   
+*   Pseudocodigo de las subrutinas que componen el proyecto
+*/
+
+// Estructuras necesarias en el programa
+
+// Entradas del usuario 
+struc BloqueDatos {
+    charIngreso[BUFFER_MAX]
+    valido
+    numero
+    arregloFactores
+    amanioArregloFactores
+}
+
+// Arreglo de entradas
+struct EstructuraArreglo {
+    arreglo
+    espacioUsado
+    tamanio
+}
+
+// Se encarga de leer las entradas del usuario y crear un arreglo con ellas
+procedure lecturaDatos(entrada)
+    call validarEntrada
+    set arregloEntradas
+end procedure
+
+// Se encarga de leer una linea y asigna un valor según el caso
+procedure validarEntrada(char linea)
+    set charIngreso
+    set valido
+    set numero
+    set arregloFactores
+    set amanioArregloFactores
+end procedure
+
+// Calcula los factores de un número
+procedure calcularFactores
+    // Adaptado de URL: https://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
+
+    // 2 es factor
+    mientras (!(numero % 2)) {
+        agregarElemento(2)
+        numero = numero / i
+    }
+
+    // Es impar
+    mientras (indice = 3; indice <= (int64_t) ceil(sqrt(numero)); indice += 2) {
+        agregarElemento(indice)
+    }
+
+    // Número primo mayor a 2
+    if (numero > 2) {
+        agregarElemento numero
+    }
+end procedure
+
+// Agrega un número a un arreglo
+procedure agregarElemento
+    if (arreglo_lleno) {
+        copiaArreglo = originalArreglo
+    }
+
+    libera_memoria
+    agregarValor
+    return arregloNuevo
+end procedure
+
+// Imprime en consola un número y sus factores primos
+procedure impresionDatos
+    imprimir_numero
+    mientras(quedenValoresEnArreglo)
+        imprimir lista de factores
+end procedure
+
+// Itera sobre una lista de ingresos e imprime el resultado
+procedure printResult()
+    mientras(quedenValoresEnArreglo)
+    call impresionDatos
+end procedure
+
+/*------ Paralela ------*/
+
+// Datos compartidos por los hilos
+struc shared_data {
+    arreglos de entradas
+    thread_count
+}
+
+// Datos privados de los hilos
+struc private_data {
+    thread number
+    shared_data
+    activo
+}
+
+// Inicializa y se encarga de hacer llamados, "controlador de la concurrencia"
+procedure initParalela
+    set cantidadHilos
+    set shared_data, memoria dinamica
+    if (shared_data->arreglos de entradas) {
+        procedure create_threats
+    }
+end procedure
+
+// Crea los threads
+procedure create_threats
+    call repartirTrabajo
+    create all threads and set private private_data for each
+    call calcularFactores for each valid thread
+
+// Reparte los indíces según la cantidad de hilos
+procedure repartirTrabajo
+    set entradasTotal
+    set entradasRepartidas
+    set cantidadHilos
+    repartir entradas según entradasTotal and cantidadHilos 
+end procedure
