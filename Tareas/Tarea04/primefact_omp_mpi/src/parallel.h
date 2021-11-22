@@ -14,8 +14,8 @@
  @brief Asigna la cantidad de hilos y calcula de forma paralela
  @param argc argumento del usuario indica cantidad de hilos
  @param argv argumento del usuario indica cantidad de hilos
- @param arreglo representa el arreglo de entradas
+ @param listaEntrada representa el arreglo de entradas
 */
-void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo);
+void calcParallel(int argc, char* argv[], EstructuraArreglo *listaEntrada);
 
 #endif  // PARALLEL_H

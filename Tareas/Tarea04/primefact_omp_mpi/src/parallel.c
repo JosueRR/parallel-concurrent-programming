@@ -6,7 +6,7 @@
 
 #include "parallel.h"
 
-void initParalelizador(int argc, char* argv[], EstructuraArreglo *listaEntrada) {
+void calcParallel(int argc, char* argv[], EstructuraArreglo *listaEntrada) {
     // Set cantidad de hilos
     int thread_count = omp_get_max_threads();
     if (argc == 2) {

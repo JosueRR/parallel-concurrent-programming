@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
     arreglo = lecturaDatos(entrada, arreglo);
 
     // Calcula factores de forma paralela
-    initParalelizador(argc, argv, &arreglo);
+    calcParallel(argc, argv, &arreglo);
 
     // Imprime el resultado
     printResult(arreglo);
