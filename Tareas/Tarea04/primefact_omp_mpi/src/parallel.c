@@ -16,7 +16,9 @@ void calcParallel(int argc, char* argv[], EstructuraArreglo *listaEntrada) {
         }
     }
     // Calcula número primos de forma paralela
-    #pragma omp parallel for num_threads(thread_count) \
+    #pragma omp parallel for \
+      schedule(dynamic) \
+      num_threads(thread_count) \
       default(none) shared(listaEntrada)
     for (int i = 0; i < listaEntrada->usado; i++) {
         calcularFactores(&listaEntrada->arreglo[i]);
