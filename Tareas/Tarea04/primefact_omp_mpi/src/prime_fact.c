@@ -165,11 +165,8 @@ void calcularFactores(BloqueDatos *entrada) {
                 entrada->arregloFactores,
                 &entrada->tamanioArregloFactores);
             }
-
-            return entrada;
         }
     }
-    return entrada;
 }
 
 int64_t* agregarFactor(int64_t numero, int64_t*
