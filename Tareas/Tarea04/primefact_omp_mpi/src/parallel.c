@@ -6,14 +6,17 @@
 
 #include "parallel.h"
 
-void initParalelizador(int argc, char* argv[], EstructuraArreglo arreglo) {
+void initParalelizador(int argc, char* argv[], EstructuraArreglo *listaEntrada) {
     // Set cantidad de hilos
-    uint64_t thread_count = 0;
+    int thread_count = omp_get_max_threads();
     if (argc == 2) {
-        // if (sscanf(argv[1], "%" SCNu64, &thread_count) == 1) {
-        // } else {
-        // fprintf(stderr, "Error: invalid thread count\n");
-        // }
+        if (sscanf(argv[1], "%i", &thread_count) == 1) {
+        } else {
+        fprintf(stderr, "Error: invalid thread count\n");
+        }
     }
     // Calcula número primos de forma paralela
+    for (int i = 0; i < listaEntrada->usado; i++) {
+        calcularFactores(&listaEntrada->arreglo[i]);
+    }
 }
