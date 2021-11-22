@@ -101,7 +101,7 @@ void freeArray(EstructuraArreglo *arreglo);
  @param entrada corresponde un bloque de datos referente a una entrada
  @return un bloque de datos actualizado con su lista de factores
 */
-BloqueDatos calcularFactores(BloqueDatos entrada);
+void calcularFactores(BloqueDatos *entrada);
 
 /**
  @brief Agrega un factor a un arreglo de factores

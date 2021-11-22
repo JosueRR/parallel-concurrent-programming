@@ -119,28 +119,28 @@ void freeArray(EstructuraArreglo *a) {
 }
 
 /* CALCULO DE FACTORES */
-BloqueDatos calcularFactores(BloqueDatos entrada) {
+void calcularFactores(BloqueDatos *entrada) {
     // Adaptado de URL: https://www.geeksforgeeks.org/print-all-prime-factors-of-a-given-number/
-    if (entrada.valido) {
+    if (entrada->valido) {
         // Inicializa y asigna un arreglo de factores
-        entrada.arregloFactores = (int64_t*)
-        calloc(entrada.tamanioArregloFactores, sizeof(int64_t));
+        entrada->arregloFactores = (int64_t*)
+        calloc(entrada->tamanioArregloFactores, sizeof(int64_t));
 
         // Crea una copia del número para proder trabajar sobre él
-        int64_t numero = entrada.numero;
+        int64_t numero = entrada->numero;
 
-        if (entrada.arregloFactores) {
+        if (entrada->arregloFactores) {
             // Caso: número == par, entonces 2 es factor
             while (!(numero % 2)) {
-                entrada.arregloFactores = agregarFactor(2,
-                entrada.arregloFactores, &entrada.tamanioArregloFactores);
+                entrada->arregloFactores = agregarFactor(2,
+                entrada->arregloFactores, &entrada->tamanioArregloFactores);
                 numero = numero / 2;
             }
 
             // Caso: número == múltiplo de 3, entonces 3 es factor
             while (!(numero % 3)) {
-                entrada.arregloFactores = agregarFactor(3,
-                entrada.arregloFactores, &entrada.tamanioArregloFactores);
+                entrada->arregloFactores = agregarFactor(3,
+                entrada->arregloFactores, &entrada->tamanioArregloFactores);
                 numero = numero / 3;
             }
 
@@ -148,9 +148,9 @@ BloqueDatos calcularFactores(BloqueDatos entrada) {
             bool jmp = false;
             for (int64_t index = 5; index*index <= numero; index += 2) {
                 while (!(numero % index)) {
-                    entrada.arregloFactores = agregarFactor(index,
-                    entrada.arregloFactores,
-                    &entrada.tamanioArregloFactores);
+                    entrada->arregloFactores = agregarFactor(index,
+                    entrada->arregloFactores,
+                    &entrada->tamanioArregloFactores);
                     numero = numero / index;
                 }
                 if (jmp) {
@@ -161,9 +161,9 @@ BloqueDatos calcularFactores(BloqueDatos entrada) {
 
             // Caso: número es un primo mayor a 2
             if (numero > 2) {
-                entrada.arregloFactores = agregarFactor(numero,
-                entrada.arregloFactores,
-                &entrada.tamanioArregloFactores);
+                entrada->arregloFactores = agregarFactor(numero,
+                entrada->arregloFactores,
+                &entrada->tamanioArregloFactores);
             }
 
             return entrada;
@@ -210,11 +210,11 @@ int64_t* arregloFactores, int64_t* tamanioArregloFactores) {
     printf("%" PRIu64 ":", numero);
 
     // Se imprimen las potencias y factores del arreglo
-    while (indice < *tamanioArregloFactores && arregloFactores[indice]) {
+    while (arregloFactores[indice] && indice < *tamanioArregloFactores) {
         factor = arregloFactores[indice];
         potencia = 0;
 
-        while (indice < *tamanioArregloFactores && factor == arregloFactores[indice]) {
+        while (factor == arregloFactores[indice]) {
             ++potencia;
             ++indice;
         }
