@@ -1,8 +1,8 @@
 # C/C++ Makefile v2.2.2 2021-Set-17 Jeisson Hidalgo ECCI-UCR CC-BY 4.0
 
 # Compiler and tool flags
-CC=cc
-XC=g++
+CC=mpicc
+XC=mpic++
 DEFS=
 FLAGS=$(strip -Wall -Wextra -fopenmp $(DEFS))
 FLAGC=$(FLAGS) -std=gnu11
