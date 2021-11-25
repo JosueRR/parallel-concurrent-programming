@@ -9,18 +9,15 @@
 #include "prime_fact.h"
 
 /**
- @brief El proceso 0 lee ingresos de la entrada estándar y
- la envía a los demás procesos
- @param process_hostname nombre del host
- @param process_count contador de procesos
- @param process_number número del proceso
+ @brief Controlador del programa distribute
+ @param argc contador de argumentos
+ @param argv argumentos
 */
 void distribute_init(int argc, char* argv[]);
 
 /**
  @brief El proceso 0 lee ingresos de la entrada estándar y
  la envía a los demás procesos
- @param process_hostname nombre del host
  @param process_count contador de procesos
  @param process_number número del proceso
 */
