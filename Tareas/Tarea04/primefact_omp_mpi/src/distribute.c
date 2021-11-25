@@ -9,6 +9,31 @@
 #include <mpi.h>
 
 
+
+void process_values(int process_number, int process_count) {
+    int64_t array_lenght = 0;
+    char* elements[BLOCK_SIZE];
+    if (process_number == 0) {
+      FILE* entrada = stdin;
+      EstructuraArreglo arreglo;
+      initArray(&arreglo, BLOCK_SIZE);
+      arreglo = lecturaDatos(entrada, arreglo);
+      array_lenght = arreglo.usado;
+      for (int64_t i = 0; i < array_lenght; i++) {
+          elements[i] = arreglo.arreglo[i].charIngreso;
+      }
+      for (int i = 0; i < process_count; i++) {
+        if (MPI_Send(elements, /*capacity*/ array_lenght, MPI_CHAR, /*source*/ i
+        , /*tag*/ 0, MPI_COMM_WORLD) != MPI_SUCCESS) {
+          printf("Error could send input");
+        }
+      }
+    } else {
+       MPI_Recv(&elements[0], /*capacity*/ array_lenght, MPI_CHAR, /*source*/ 0
+      , /*tag*/ 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    }
+}
+
 void print_result(int process_number, int process_count,
 EstructuraArreglo arreglo) {
     const int previous_process = (process_count + process_number - 1)
