@@ -7,10 +7,14 @@
 #include <stdlib.h>
 #include "prime_fact.h"
 #include "parallel.h"
+// #include "distribute.h"
 
 int main(int argc, char* argv[]) {
+    // En caso de querer correr la forma distribuída activar
+    // distribute_init(argc, argv);
+
     // Almacena la entrada del usuario
-    FILE* entrada = stdin;
+    FILE *entrada = stdin;
     // Almacena las entradas del usuario
     EstructuraArreglo arreglo;
 
