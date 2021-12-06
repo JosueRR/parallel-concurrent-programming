@@ -6,6 +6,14 @@
 #include "mpi_control.h"
 
 /**
+ * @brief Method to shuffle an array
+ * @param array pointer to array to shuffle
+ * @param size of the array
+ * @return  1 if theres is any error
+ */
+void mpi_control_shuffle(int * array, int size);
+
+/**
  * @brief Method to creat unit of work
  * @param array_length pointer to array to shuffle
  * @param total_process number of total process
@@ -33,7 +41,22 @@ int mpi_control_calculate_start(int rank, int end, int workers, int begin);
  */
 int mpi_control_calculate_finish(int rank, int end, int workers, int begin);
 
+/**
+ * @brief Calculates minimum number between to numbers
+ * @param x first number to comparate
+ * @param y second number to comparate
+ * @return minimum number
+ */
+int64_t mpi_control_min(int64_t x, int64_t y);
 
+/**
+ * @brief Send messages to indicate which process has to print
+ * @param process_array array of processes
+ * @param process_count total number of processes
+ * @param my_values array of values of process 0
+ */
+void send_print_messages(int * process_array, int process_count,
+  struct_array_t * my_values);
 
 /**
  * @brief Process prints if message to print is received
@@ -41,7 +64,42 @@ int mpi_control_calculate_finish(int rank, int end, int workers, int begin);
  */
 void print_results(struct_array_t * my_values);
 
+/**
+ * @brief This methods sends work load to the processes
+ * @param array_blocks array of blocks
+ * @param process_count total number of processes
+ * @param first_index first index to process
+ * @param last_index last index to process
+ * @param data dynamic array with the inputs
+ * @return pointer to array with indexes per unit
+ */
+int * distribute_work(int64_t * array_blocks,
+  int process_count,
+  int * first_index,
+  int * last_index,
+  dynamic_array_t * data);
 
+/**
+ * @brief This methods sends data to other processes
+ * @param process_number actual process
+ * @param first_index first index to process
+ * @param last_index last index to process
+ * @param data dynamic array with the inputs
+ */
+void send_data(int process_number,
+  int first_index,
+  int last_index,
+  dynamic_array_t * data);
+
+/**
+ * @brief Method to receive first and last index
+ * @param process_number actual process
+ * @param first_index first index to process
+ * @param last_index last index to process
+ */
+void receive_indexes(int process_number,
+  int * first_index,
+  int * last_index);
 
 /**
  * @brief Method to receive the array to process
@@ -138,7 +196,22 @@ int mpi_control_process_to_work(int process_number, uint64_t threads_number,
   return error;
 }
 
-
+void send_print_messages(int * process_array, int process_count,
+  struct_array_t * my_values ) {
+  int can_print = 1;
+  int can_continue = 0;
+  int target = 0;
+  for (int i = 0; i < process_count; ++i) {
+    target = process_array[i];
+    if (target) {
+      MPI_Send(&can_print, 1, MPI_C_BOOL, target, 0, MPI_COMM_WORLD);
+      MPI_Recv(&can_continue, 1,
+        MPI_C_BOOL, MPI_ANY_SOURCE, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+    } else {
+      interface_print_data(my_values);
+    }
+  }
+}
 
 void print_results(struct_array_t * my_values) {
   int can_print = 1;
@@ -148,7 +221,29 @@ void print_results(struct_array_t * my_values) {
   MPI_Send(&can_continue, 1, MPI_C_BOOL, 0, 0, MPI_COMM_WORLD);
 }
 
-
+int * distribute_work(int64_t * array_blocks,
+  int process_count,
+  int * first_index,
+  int * last_index,
+  dynamic_array_t * data) {
+  int * process_array = calloc(process_count, sizeof(int));
+  for (int i = 0; i < process_count; ++i) {
+    process_array[i] = i;
+  }
+  mpi_control_shuffle(process_array, process_count);
+  int counter = 0;
+  for (int i = 0; i < process_count; ++i) {
+    if (process_array[i] != 0) {
+      send_data(process_array[i], array_blocks[counter],
+        array_blocks[counter+1], data);
+      counter += 2;
+    } else {
+      *first_index  = array_blocks[counter++];
+      *last_index = array_blocks[counter++];
+    }
+  }
+  return process_array;
+}
 
 void send_data(int process_number,
   int first_index,
@@ -255,4 +350,14 @@ int64_t mpi_control_min(int64_t x, int64_t y) {
   return ((x < y) ? x : y);
 }
 
-
+void mpi_control_shuffle(int * array, int size) {
+  srand(time(NULL));
+  if (size > 1) {
+    for (int i = 0; i < size - 1; ++i) {
+      int j = i + rand() / (RAND_MAX / (size - i) + 1);  // NOLINT
+      int t = array[j];
+      array[j] = array[i];
+      array[i] = t;
+    }
+  }
+}
