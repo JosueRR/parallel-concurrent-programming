@@ -10,7 +10,7 @@
 #include "queue_data.h"
 
 /**
- * @brief Registro apra almacenar los numero a procesar y la cola de su factorizacion
+ * @brief Registro para almacenar los numero a procesar y la cola de su factorizacion
  * 
  */
 typedef struct {
