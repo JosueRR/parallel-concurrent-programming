@@ -60,6 +60,12 @@ En el caso cuando se utiliza **1** solo hilo se puede observar que tiene una dur
 
 ![Grafico Concurrencia](https://github.com/JosueRR/ppc21b-04-josue_retana/blob/master/Tareas/Tarea03/primefact_optimization/report/grafico_concurrency_level.jpeg)
 
+## _Comparación Pthreads y openMP_  
 En la gráfica se puede notar como Pthreads superó a OpenMP, aún así obtuvieron resultados muy similares y la diferencia es de solo algunos segundos. Esta diferencia (en este caso), y por lo tanto eligir si se utiliza tecnología imperativa o declarativa recae en el programador, depende de las necesidades. Finalmente es importante mencionar la facilidad que conlleva implementar teclogía declarativa (OpenMP), en donde una línea de código realiza una tarea que con Pthreads requiere múltiples métodos.
 
 ![Grafico OMPvsPthreads](https://github.com/JosueRR/ppc21b-04-josue_retana/blob/master/Tareas/Tarea04/primefact_omp_mpi/report/grafico_pthreadsVSopenmp.png)
+
+## _Comparación MPI y openMP_  
+En el caso de comparar MPI y openMP se puede notar un gran incremento de velocidad, el programa que utiliza distribución supera por casi el doble de velocidad al programa que no. En el caso de openMP el programa dura _113.04_ segundos, mientras que MPI dura _54.03_ segundos. Esto es de esperarse, ya que el programa utiliza además de utilizar hilos, distribuye la carga de trabajo entre el cluster.  
+
+![Grafico OMPvsMPI](grafico_mpi_openmp.jpeg)
