@@ -37,6 +37,8 @@ procedure vehicle(enter_from, exit_to)
   while (index != exit)
     wait(array_semaphore[counter])
     drive()
+    print_pos(vehicle, counter)
+    counter++
     signal(array_semaphore[counter])
   end while
 end procedure
@@ -48,4 +50,8 @@ procedure drive()
     duration += rand() % range
   end if
   sleep(duration)
+end procedure
+
+procedure print_pos(vehicle, actual_seg)
+  print vehicle ": " actual_seg 
 end procedure
