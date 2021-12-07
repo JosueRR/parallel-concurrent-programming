@@ -46,3 +46,16 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
+/**
+ @brief Simula la conducción de un vehículo
+ @param shared_data memoria compartida entre hilos
+*/
+void drive(shared_data_t shared_data) {
+    int const range = shared_data.drive_max_delay - shared_data.drive_min_delay;
+    int duration = shared_data.drive_min_delay;
+    unsigned int seed;
+    if (range > 0) {
+        duration += (rand_r(&seed) % range) + 1;
+    }
+    sleep(duration);
+}
